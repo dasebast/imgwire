@@ -12,9 +12,9 @@ var Pics = require('./assets/js/models/picModel');
 
 
 // ============================ CONTROLLERS ===========================
-// var TagsController = require('./assets/js/controllers/tagCtrl');
-// var UserController = require('./assets/js/controllers/userCtrl');
-// var PicController = require('./assets/js/controllers/picCtrl');
+var TagsController = require('./assets/js/controllers/tagCtrl');
+var UserController = require('./assets/js/controllers/userCtrl');
+var PicController = require('./assets/js/controllers/picCtrl');
 
 
 // ============================ MIDDLEWARE ============================
@@ -28,14 +28,14 @@ App.use(BodyParser.json());
 
 
 // ============================ ENDPOINTS =============================
-// App.post('/api/tags', TagsController.create);
-// App.get('/api/tags', TagsController.get);
+App.post('/api/tags', TagsController.create);
+App.get('/api/tags', TagsController.get);
 
-// App.post('/api/user', UserController.create);
-// App.get('/api/user', UserController.get);
+App.post('/api/user', UserController.create);
+App.get('/api/user', UserController.get);
 
-// App.post('/api/pic', PicController.create);
-// App.get('/api/pic', PicController.get);
+App.post('/api/pic', PicController.create);
+App.get('/api/pic', PicController.get);
 
 
 
