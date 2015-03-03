@@ -14,7 +14,7 @@ module.exports = {
 	},
 
 	get: function(req, res) {
-        Pics.findByObjectId(req.body.tags._id).exec().then(function(pic) {
+        Pics.find({}).exec().then(function(pic) {
             return res.status(200).json(pic)
         });
     }
