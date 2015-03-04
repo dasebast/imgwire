@@ -8,7 +8,7 @@ var picSchema = Mongoose.Schema({
 	description: {type: String},
 	dateUploaded: {type: Date, default: Date.now},
 	active: {type: Boolean, default: true},
-	owner: {type: Mongoose.Schema.Types.ObjectId, ref: 'Users'},
+	owner: {type: Mongoose.Schema.Types.ObjectId, ref: 'User'},
 	tags: [{type: Mongoose.Schema.Types.ObjectId, ref: 'Tags'}]
 
 });
