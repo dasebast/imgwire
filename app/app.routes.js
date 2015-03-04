@@ -21,7 +21,16 @@ function config ($stateProvider, $urlRouterProvider) {
 			controller: 'loginCtrl',
 			controllerAs: 'vm'
 		})
+
+		.state('signup', {
+			url:'/signup',
+			templateUrl: '/components/signup/signupView.html',
+			controller: 'signupCtrl',
+			controllerAs: 'vm'
+		})
+
 		
+
 	}
 
 })();
