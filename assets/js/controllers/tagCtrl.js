@@ -14,20 +14,25 @@ module.exports = {
 		});
 	},
 
-	get: function(req, res) {
-		Tags.find({}).exec().then(function(tag) {
-			tag.forEach(function(tagObj) {
-				Pics.find({}).exec().then(function(picture) {
-					picture.forEach(function(picObj) {
-						for(var i = 0; i < picObj.tags.length; i++) {
-							if(picObj.tags[i]._id === tagObj._id) {
-								console.log('horray')
-							}
-						}
+	// get: function(req, res) {
+	// 	Tags.find({}).exec().then(function(tag) {
+	// 		tag.forEach(function(tagObj) {
+	// 			Pics.find({}).exec().then(function(picture) {
+	// 				picture.forEach(function(picObj) {
+	// 					picObj.populate(tags)
 						
-					})
+	// 				})
 				
-				})
+	// 			})
+	// 		})
+	// 		return res.status(200).json(tag)
+	// 	});
+	// }
+
+	get: function(req, res) {
+		Tags.find({title: 'football'}).exec().then(function(tag) {
+			tag.forEach(function(tagObj) {
+				console.log(tagObj)
 			})
 			return res.status(200).json(tag)
 		});
