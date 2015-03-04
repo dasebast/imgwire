@@ -15,7 +15,12 @@ function config ($stateProvider, $urlRouterProvider) {
 			controller: 'homeCtrl',
 			controllerAs: 'vm'
 		})
-		//.state
+		.state('login', {
+			url: '/login',
+			templateUrl: '/components/login/loginView.html',
+			controller: 'loginCtrl',
+			controllerAs: 'vm'
+		})
 	}
 
 })();
