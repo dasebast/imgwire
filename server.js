@@ -6,15 +6,15 @@ var Port = 8888;
 
 var App = Express();
 
-var User = require('./assets/js/models/userModel');
-var Tags = require('./assets/js/models/tagModel');
-var Pics = require('./assets/js/models/picModel');
+var User = require('./assets/models/userModel');
+var Tags = require('./assets/models/tagModel');
+var Pics = require('./assets/models/picModel');
 
 
 // ============================ CONTROLLERS ===========================
-var TagsController = require('./assets/js/controllers/tagCtrl');
-var UserController = require('./assets/js/controllers/userCtrl');
-var PicController = require('./assets/js/controllers/picCtrl');
+var TagsController = require('./assets/controllers/tagCtrl');
+var UserController = require('./assets/controllers/userCtrl');
+var PicController = require('./assets/controllers/picCtrl');
 
 
 // ============================ MIDDLEWARE ============================
