@@ -21,6 +21,7 @@ function config ($stateProvider, $urlRouterProvider) {
 			controller: 'loginCtrl',
 			controllerAs: 'vm'
 		})
+		
 	}
 
 })();
