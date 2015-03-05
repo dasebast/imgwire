@@ -18,7 +18,7 @@ var PicController = require('./assets/controllers/picCtrl');
 
 
 // ============================ MIDDLEWARE ============================
-App.use(Express.static(__dirname + '/public'));
+App.use(Express.static(__dirname + '/app'));
 App.use(BodyParser.json());
 
 

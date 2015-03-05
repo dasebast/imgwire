@@ -4,12 +4,20 @@ angular
 	.module('imgwire')
 	.controller('signupCtrl', signupCtrl);
 
-function signupCtrl (signupService) {
+function signupCtrl (signupService, $location) {
 	var vm = this;
 
-	vm.test = 'this is the signup Controller'
+	vm.signup = function(obj) {
+		console.log('im running' + obj.username)
+	signupService.signupUser(obj).then(function(res) {
+		console.log(res)
+		$location.path('/')
+	}).catch(function(err) {
+		console.log(err)
+	});
 
-	signupService.getData();
+}
+	//signupService.getData();
 }
 
 })()
