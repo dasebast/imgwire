@@ -64,20 +64,20 @@ p.forgotpass a {
 
           <div class="form-group input-group">
                 <span class="input-group-addon"><i class="fa fa-user fa-lg"></i></span>
-                <input type="text" class="form-control" placeholder="Username" id="inputUsername" ng-model="">
+                <input type="text" class="form-control" placeholder="Username" id="inputUsername" ng-model="obj.username">
           </div>
 
           <div class="form-group input-group">
                 <span class="input-group-addon"><i class="fa fa-lock fa-lg"></i></span>
-                <input type="text" class="form-control" placeholder="Password" id="inputPassword">
+                <input type="text" class="form-control" placeholder="Password" id="inputPassword" ng-model="obj.password">
           </div>
 
           <div class="form-group input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope fa-lg"></i></span>
-                <input type="text" class="form-control" placeholder="Email Address" id="inputEmailAddress">
+                <input type="text" class="form-control" placeholder="Email Address" id="inputEmailAddress" ng-model="obj.email">
           </div>
 
-          <button type="button" class="btn btn-danger btn-md login">SIGNUP</button>
+          <button type="button" class="btn btn-danger btn-md login" ng-click='vm.signup(obj)'>SIGNUP</button>
         </form>
         <p class="forgotpass"><a href="#" class="small">Forgot Password?</a></p>
 
