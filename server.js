@@ -3,6 +3,10 @@ var Express = require('express');
 var BodyParser = require('body-parser');
 var Mongoose = require('mongoose');
 var Cloudinary = require('cloudinary');
+var Passport = require('passport')
+var Session = require('express-session');
+var LocalStrategy = require('passport-local').Strategy;
+
 var	Env = require('./env.js');
 var Port = 8888;
 
@@ -38,6 +42,61 @@ App.use(BodyParser.json());
 
 // ============================ AUTHENTICATION ========================
 
+App.use(Session({
+	secret: '12345imgwire'
+}));
+
+App.use(Passport.initialize());
+App.use(Passport.session());
+
+Passport.use(new LocalStrategy({
+	usernameField: 'email',
+	passwordField: 'password'
+}, function(email, password, done) {
+	console.log(email, password, done)
+	User.findOne({email: email}).exec().then(function(user) {
+		console.log(user)
+		if(!user) {
+			console.log("!user");
+			return done(null, false);
+		} 
+		user.comparePassword(password).then(function(isMatch) {
+			console.log("!match");
+
+			if(!isMatch) {
+				return done(null, false);
+			}
+			return done (null, user);
+		});
+	});
+}));
+
+Passport.serializeUser(function(user, done) {
+	//input user model (mongoose)
+	done(null, user);
+});
+
+Passport.deserializeUser(function(obj, done) {
+	//user object (json)
+	done(null, obj);
+});
+
+App.post('/api/auth', Passport.authenticate('local'), function(req, res) {
+	// if auth was successful, this will happen
+	console.log('this is the redirect')
+	return res.status(200).redirect("/#/dashboard");
+});
+
+
+
+var isAuthed = function(req, res, next) {
+	if(!req.isAuthenticated()) {
+
+		console.log(req.user + "this is the req.user is auth");
+		return res.status(401).end();
+	}
+	return next();
+}
 
 
 // ============================ ENDPOINTS =============================
@@ -49,6 +108,12 @@ App.get('/api/user', UserController.get);
 
 App.post('/api/pic', PicController.create);
 App.get('/api/pic', PicController.get);
+
+App.get("/api/profile", isAuthed, UserController.profile);
+App.get('/api/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
 
 
