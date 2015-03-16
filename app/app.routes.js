@@ -35,8 +35,11 @@ function config ($stateProvider, $urlRouterProvider) {
 			controllerAs: 'vm',
 			resolve:  {
 						app: function(signupService) {
-							return signupService.getProfile()
+							return signupService.getProfile()	
+						},
 
+						pictures: function(dashService) {
+							return dashService.getPictures()
 						}
 					}	
 		})

@@ -20,7 +20,7 @@ angular
 				}
 			})
 			.then(function(response) {
-				console.log('login service almost resolved')
+				console.log('login service response')
 				dfd.resolve(response)
 			})
 			.catch(function(err) {

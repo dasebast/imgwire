@@ -7,7 +7,7 @@ angular
 function dashService ($http, $q) {
 	this.getData = function() {
 		console.log('im in the dashService')
-	}
+	},
 
 	this.logMeOut = function() {
 		var deferred = $q.defer();
@@ -20,6 +20,23 @@ function dashService ($http, $q) {
 			deferred.resolve(response.data);
 		});
 		return deferred.promise;
+	},
+
+	this.getPictures = function() {
+		var dfd = $q.defer();
+		console.log('going to fetch the pictures')
+		$http({
+			method: 'GET',
+			url: '/api/pic'
+		})
+		.then(function(response) {
+			console.log(response.data)
+			dfd.resolve(response.data)
+		})
+		.catch(function(err) {
+			console.log('error in getting the pics bro')
+		})
+		return dfd.promise
 	}
 }
 })()

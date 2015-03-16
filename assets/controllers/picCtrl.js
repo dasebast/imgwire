@@ -13,49 +13,58 @@ module.exports = {
 		
 		});
 	},
-
-	// get: function(req, res) {
- //        Pics.find({}).populate('tags').populate('owner').where('tags.title').all(['football']).exec().then(function(pic) {
- //        	console.log(pic);
- //        	return res.status(200).json("mongooooooose");
- //        });
- //    }
-
-    	get: function(req, res) {
-        Pics.find({}).populate('tags', null, {title: {$all: ['football','basketball']}}).exec().then(function(queryResults) {
-        	
-        	if (err) {
-        		return res.status(500).json(err);
-        	}
-        	else if (queryResults) {
-        		queryResults = queryRes.filter(function(queryResult) {
-        			console.log('is this working?')
-        			return queryResult.tags.length;
-
-        		})
-        		
-        	}
-
-
-        	// console.log(queryRes);
+    get: function(req, res) {
+        Pics.find({}).exec().then(function(pics) {
+            res.status(200).json(pics)
         });
-        	// console.log("it worked");
-        	return res.status(200).json("mongooooooose");
-    	    }
+    }
+
+
+    	
 	    
 
-    	// get: function(req, res) {
-     //    Pics.find({}).populate('tags').populate('owner').exec().then(function(pic) {
-     //    	var query = pic;
-     //    	// console.log(pic);
-     //    	query.where('tags').all(['football']);
-     //    	console.log("it worked");
-     //    	return res.status(200).json("mongooooooose");
-    	//     });
-	    // }
+    
 
 }
 
+// get: function(req, res) {
+//         Pics.find({}).populate('tags', null, {title: {$all: ['football','basketball']}}).exec().then(function(queryResults) {
+            
+//             if (err) {
+//                 return res.status(500).json(err);
+//             }
+//             else if (queryResults) {
+//                 queryResults = queryRes.filter(function(queryResult) {
+//                     console.log('is this working?')
+//                     return queryResult.tags.length;
+
+//                 })
+                
+//             }
+
+
+//              console.log(queryRes);
+//         });
+//              console.log("it worked");
+//             return res.status(200).json("mongooooooose");
+//             }
+
+    // get: function(req, res) {
+ //        Pics.find({}).populate('tags').populate('owner').where('tags.title').all(['football']).exec().then(function(pic) {
+ //         console.log(pic);
+ //         return res.status(200).json("mongooooooose");
+ //        });
+ //    }
+
+    // get: function(req, res) {
+     //    Pics.find({}).populate('tags').populate('owner').exec().then(function(pic) {
+     //     var query = pic;
+     //     // console.log(pic);
+     //     query.where('tags').all(['football']);
+     //     console.log("it worked");
+     //     return res.status(200).json("mongooooooose");
+        //     });
+        // }
 
 	// get: function(req, res) {
  //        Pics.find({}).populate('tags').populate('owner').exec().then(function(pic) {

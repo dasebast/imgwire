@@ -30,13 +30,13 @@ function signupService($q, $http) {
 
 	this.getProfile = function() {
 		var deferred = $q.defer();
-		console.log('almost resolved')
+		console.log('getting profile')
 		$http({
 			method: 'GET',
 			url: '/api/profile'
 		}).then(function(response) {
-			console.log('profile promise resolved')
-			deferred.resolve(response);
+			console.log(response.data)
+			deferred.resolve(response.data);
 		});
 		return deferred.promise;
 	};
