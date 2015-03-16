@@ -81,11 +81,7 @@ Passport.deserializeUser(function(obj, done) {
 	done(null, obj);
 });
 
-App.post('/api/auth', Passport.authenticate('local'), function(req, res) {
-	// if auth was successful, this will happen
-	console.log('this is the redirect')
-	return res.status(200).redirect("/#/dashboard");
-});
+
 
 
 
@@ -110,6 +106,10 @@ App.post('/api/pic', PicController.create);
 App.get('/api/pic', PicController.get);
 
 App.get("/api/profile", isAuthed, UserController.profile);
+App.post('/api/auth', Passport.authenticate('local'), function(req, res) {
+	console.log('im in the server')
+	return res.status(200).redirect('/#/dashboard');
+});
 App.get('/api/logout', function(req, res){
   req.logout();
   res.redirect('/');
