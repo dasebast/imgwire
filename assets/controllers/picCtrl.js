@@ -14,7 +14,11 @@ module.exports = {
 		});
 	},
     get: function(req, res) {
-        Pics.find({}).exec().then(function(pics) {
+        Pics.find({})
+            .select('_id imageUrl upvotes tags')
+            .populate('tags')
+            .exec()
+            .then(function(pics) {
             res.status(200).json(pics)
         });
     }

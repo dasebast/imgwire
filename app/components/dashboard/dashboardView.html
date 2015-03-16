@@ -11,10 +11,16 @@
 	<button class='btn btn-submit' ng-click='vm.logout()'>logout</button>
 </div>
 
+<div>
+	<input class='text' ng-model='search' ng-trim='false'/>
+</div>
+
 <div class='container'>
  <div class="row">
     <div class="col-lg-2 col-sm-3 col-xs-4" ng-repeat='pics in vm.pictures'>
              <img src={{pics.imageUrl}} class="thumbnail img-responsive">
+             <p ng-repeat='tag in pics.tags | filter:search'> {{pics.upvotes}} {{tag.title}} </p>
+             
     </div>
 </div>
 
