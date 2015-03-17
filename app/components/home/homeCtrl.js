@@ -6,11 +6,12 @@ angular
   .module('imgwire')
   .controller('HomeCtrl', HomeCtrl)
 
-function HomeCtrl (homeService, $rootScope, getImgs, imageCloudService, $scope) {
+function HomeCtrl (homeService, getImgs, getTags, imageCloudService, $scope) {
   var vm = this;
 
   vm.test = "homeCtrl win";
-
+  vm.tags = getTags;
+  console.log(vm.tags);
   vm.imgs = getImgs;
 
   imageCloudService.imageCloud(vm.imgs)
@@ -21,7 +22,9 @@ function HomeCtrl (homeService, $rootScope, getImgs, imageCloudService, $scope) 
     	console.log($scope.imgs);
     });
 
-
+  vm.tagSearch = function(id) {
+    console.log(id);
+  };
 
 
 
