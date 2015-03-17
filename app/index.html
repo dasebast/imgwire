@@ -10,22 +10,30 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.js"></script>
 </head>
 
 <body ng-app="imgwire">
 
-<div ui-view></div>
+ <header ng-include src="'tpl/header.html'"></header>
+<ui-view></ui-view>
 
-<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/react.js"></script>
+<script src="/node_modules/ngReact/ngReact.js"></script>
 <script src="/app.module.js"></script>
 <script src="/app.routes.js"></script>
-<script src="/components/home/homeCtrl.js"></script>
+<script src="/components/home/HomeCtrl.js"></script>
 <script src="/components/login/loginCtrl.js"></script>
 <script src="/components/login/loginService.js"></script>
 <script src="/components/signup/signupCtrl.js"></script>
 <script src="/components/signup/signupService.js"></script>
+<script src="/components/home/homeService.js"></script>
+<script src="/components/home/imageCloudService.js"></script>
+<script src="/components/react/reactComponents.js"></script>
 
 </body>
 </html>
