@@ -153,7 +153,9 @@ var ImageCloud = React.createClass({
     })
   },
   render: function () {
-    var modalShow = this.state.modalUrl ? <Modal closeModal={this.closeModal} url={this.state.modalUrl} onClick={this.closeModal}/> : null;
+    
+    /*{var modalShow = this.state.modalUrl ? <Modal closeModal={this.closeModal} url={this.state.modalUrl} onClick={this.closeModal}/> : null;}*/
+    var modalShow = null;
     var mapImageCloud = !this.state.imgs ? null : this.state.imgs.map( (item, index) => {
       var styles = {
       img: {
