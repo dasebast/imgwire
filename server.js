@@ -4,7 +4,6 @@ var BodyParser = require('body-parser');
 var Mongoose = require('mongoose');
 var Cloudinary = require('cloudinary');
 var	Env = require('./env.js');
-var imgs = require('./imgs/imgs.js');
 var Port = 8888;
 
 
@@ -49,8 +48,7 @@ App.post('/api/user', UserController.create);
 App.get('/api/user', UserController.get);
 
 App.post('/api/pic', PicController.create);
-App.get('/api/pic', function(req, res) {
-	res.status(200).json(imgs);
+App.get('/api/pic', PicController.get)
 });
 
 
