@@ -1,8 +1,6 @@
 (function() {
 
 angular
-	.module('imgwire', ['ui.router'])
-	
-
+	.module('imgwire', ['ui.router', 'react']);
 
 })();

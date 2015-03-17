@@ -1,13 +1,11 @@
-<div ng-include src="'tpl/header.html'"></div> 
-
-
-What???
-
 <div class="container" style="padding-top: 100px;">
 
 	<div class="row">
 		<div class="col-md-9 text-center">
-		<img src="images/temp/wire.png" width="85%">
+			<div id="viewPort" class="container-fluid" height="100%" width="100%">
+			<canvas height="500px" width="700px" border="none" id="cloud"/>
+				<react-component name="ImageCloud" props="imgs" watch-depth="value"></react-component>
+			</div>
 		</div>
 
 		<div class="col-md-3" style=";border-left: 1px solid #ededed;">
@@ -43,3 +41,4 @@ What???
 </div>
 
 <div ng-include src="'tpl/footer.html'"></div> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/react-with-addons.min.js"></script>
