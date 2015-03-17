@@ -48,8 +48,7 @@ App.post('/api/user', UserController.create);
 App.get('/api/user', UserController.get);
 
 App.post('/api/pic', PicController.create);
-App.get('/api/pic', PicController.get)
-});
+App.get('/api/pic', PicController.get);
 
 
 
