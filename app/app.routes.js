@@ -36,11 +36,11 @@ function config ($stateProvider, $urlRouterProvider) {
 			resolve:  {
 						app: function(signupService) {
 							return signupService.getProfile()	
-						},
-
-						pictures: function(dashService) {
-							return dashService.getPictures()
 						}
+
+						// pictures: function(dashService) {
+						// 	return dashService.getPictures()
+						// }
 					}	
 		})
 
