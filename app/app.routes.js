@@ -17,6 +17,9 @@ function config ($stateProvider, $urlRouterProvider) {
 			resolve: {
 				getImgs: function(homeService) {
 					return homeService.getPics();
+				},
+				getTags: function(homeService) {
+					return homeService.getTags();
 				}
 			}
 		})

@@ -13,16 +13,8 @@
 			<div>
 			<h3 style="font-family: 'Oswald', serif;
 		font-size: 28px;font-style: italic;">Trending Now</h3>
-			<ul>
-				<li>test</li>
-				<li>test</li>
-				<li>test</li>
-				<li>test</li>
-				<li>test</li>
-				<li>test</li>
-				<li>test</li>
-				<li>test</li>
-				<li>test</li>
+			<ul ng-repeat="tag in vm.tags">
+				<button class="btn btn-primary" ng-click="vm.tagSearch(tag._id)">{{tag.title}}</button>
 			</ul>
 
 			<h3 style="font-family: 'Oswald', serif;

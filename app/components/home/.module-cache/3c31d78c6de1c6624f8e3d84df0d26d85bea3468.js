@@ -8,7 +8,7 @@ angular
 function imageCloudService ($q) {
 
 
-
+// imgs [{id, url, likes, tags []}]
 this.imageCloud = function (imgs) {
 		var dfd = $q.defer();
 

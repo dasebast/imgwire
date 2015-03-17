@@ -5,17 +5,37 @@
 		.service('homeService', homeService);
 
 	function homeService($http, $q) {
-		var apiUrl = '/api/pic';
+		var apiUrl = '/api';
 
 		this.getPics = function() {
 			var dfd = $q.defer();
-			$http.get(apiUrl)
+			$http.get(apiUrl + '/pic')
 				.then(function(res) {
-					console.log(res);
+					var tempArr = [];
+					for (var i = 0; i < res.data.length; i++){
+						tempArr.push({
+										//TODO get the right key names
+										'id': res.data[i]._id,
+										'url': res.data[i].objUrl,
+										'likes': res.data[i].upvotes
+						})
+					};
+					//TODO replace res.data with tempArr
 					dfd.resolve(res.data);
 				});
 			return dfd.promise;
 		}
+
+	this.getTags = function() {
+		var dfd = $q.defer();
+		$http.get(apiUrl + '/tags')
+			.then(function(res) {
+				dfd.resolve(res.data);
+			})
+			return dfd.promise;
+	}
+
+
 	}
 
 })();
