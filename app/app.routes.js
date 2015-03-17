@@ -36,6 +36,21 @@ function config ($stateProvider, $urlRouterProvider) {
 			controller: 'signupCtrl',
 			controllerAs: 'vm'
 		})
+		.state('dashboard', {
+			url:'/dashboard',
+			templateUrl: '/components/dashboard/dashboardView.html',
+			controller: 'dashCtrl',
+			controllerAs: 'vm',
+			resolve:  {
+						app: function(signupService) {
+							return signupService.getProfile()	
+						}
+
+						// pictures: function(dashService) {
+						// 	return dashService.getPictures()
+						// }
+					}	
+		})
 
 		
 

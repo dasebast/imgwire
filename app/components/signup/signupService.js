@@ -18,7 +18,7 @@ function signupService($q, $http) {
 			}
 		})
 		.then(function(response) {
-			console.log(response)
+			console.log(response + "sign up response")
 			dfd.resolve(response.data)
 		})
 		.catch(function(err) {
@@ -26,11 +26,24 @@ function signupService($q, $http) {
 			dfd.reject(err);
 		})
 		return dfd.promise
-	}
+	},
+
+	this.getProfile = function() {
+		var deferred = $q.defer();
+		console.log('getting profile')
+		$http({
+			method: 'GET',
+			url: '/api/profile'
+		}).then(function(response) {
+			console.log(response.data)
+			deferred.resolve(response.data);
+		});
+		return deferred.promise;
+	};
 
 	this.getData = function() {
 		console.log('im in ther signup service')
-	}
+	};
 }
 
 })()

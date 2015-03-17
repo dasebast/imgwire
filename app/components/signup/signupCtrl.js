@@ -11,7 +11,7 @@ function signupCtrl (signupService, $location) {
 		console.log('im running' + obj.username)
 	signupService.signupUser(obj).then(function(res) {
 		console.log(res)
-		$location.path('/')
+		$location.path('/dashboard')
 	}).catch(function(err) {
 		console.log(err)
 	});
