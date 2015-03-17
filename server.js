@@ -6,6 +6,7 @@ var Cloudinary = require('cloudinary');
 var Passport = require('passport')
 var Session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
+var imgs = require('./imgs/imgs.js');
 
 var	Env = require('./env.js');
 var Port = 8888;
@@ -103,7 +104,9 @@ App.post('/api/user', UserController.create);
 App.get('/api/user', UserController.get);
 
 App.post('/api/pic', PicController.create);
-App.get('/api/pic', PicController.get);
+App.get('/api/pic', function(req, res) {
+	res.status(200).json(imgs);
+});
 
 App.get("/api/profile", isAuthed, UserController.profile);
 App.post('/api/auth', Passport.authenticate('local'), function(req, res) {
