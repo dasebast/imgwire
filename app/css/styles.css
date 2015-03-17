@@ -1,3 +1,27 @@
 body {		
 		background-color: #FAFAFA;
 }
+
+.box {
+    position: absolute; 
+/* 	border: 1px solid black; */
+	border-radius: 12px;
+	background: rgba(255,255,255,1);
+	visibility: visible;
+	opacity: 1;
+	transform: scale(1);
+	transition: transform 40ms ease-out;
+}
+
+.box:hover {
+	transform: scale(1.32);
+}
+
+#viewPort {
+	padding: 10px;
+}
+
+
+header {
+	margin-bottom: 5px;
+}

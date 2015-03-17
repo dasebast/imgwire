@@ -2,7 +2,7 @@
 
 angular
 	.module('imgwire')
-	.config(config)
+	.config(config);
 
 function config ($stateProvider, $urlRouterProvider) {
 		
@@ -12,8 +12,16 @@ function config ($stateProvider, $urlRouterProvider) {
 		.state('home', {
 			url: '/home',
 			templateUrl: '/components/home/homeView.html',
-			controller: 'homeCtrl',
-			controllerAs: 'vm'
+			controller: 'HomeCtrl',
+			controllerAs: 'vm',
+			resolve: {
+				getImgs: function(homeService) {
+					return homeService.getPics();
+				},
+				getTags: function(homeService) {
+					return homeService.getTags();
+				}
+			}
 		})
 		.state('login', {
 			url: '/login',

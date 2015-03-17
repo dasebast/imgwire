@@ -1,13 +1,11 @@
-<div ng-include src="'tpl/header.html'"></div> 
-
-
-What???
-
 <div class="container" style="padding-top: 100px;">
 
 	<div class="row">
 		<div class="col-md-9 text-center">
-		<img src="images/temp/wire.png" width="85%">
+			<div id="viewPort" class="container-fluid" height="100%" width="100%">
+			<canvas height="500px" width="700px" border="none" id="cloud"/>
+				<react-component name="ImageCloud" props="imgs" watch-depth="value"></react-component>
+			</div>
 		</div>
 
 		<div class="col-md-3" style=";border-left: 1px solid #ededed;">
@@ -15,16 +13,8 @@ What???
 			<div>
 			<h3 style="font-family: 'Oswald', serif;
 		font-size: 28px;font-style: italic;">Trending Now</h3>
-			<ul>
-				<li>test</li>
-				<li>test</li>
-				<li>test</li>
-				<li>test</li>
-				<li>test</li>
-				<li>test</li>
-				<li>test</li>
-				<li>test</li>
-				<li>test</li>
+			<ul ng-repeat="tag in vm.tags">
+				<button class="btn btn-primary" ng-click="vm.tagSearch(tag._id)">{{tag.title}}</button>
 			</ul>
 
 			<h3 style="font-family: 'Oswald', serif;
@@ -43,3 +33,4 @@ What???
 </div>
 
 <div ng-include src="'tpl/footer.html'"></div> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/react-with-addons.min.js"></script>
