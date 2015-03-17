@@ -104,6 +104,7 @@ App.get('/api/user', UserController.get);
 
 App.post('/api/pic', PicController.create);
 App.get('/api/pic', PicController.get);
+App.get('/api/tagPictures', PicController.get2)
 
 App.get("/api/profile", isAuthed, UserController.profile);
 App.post('/api/auth', Passport.authenticate('local'), function(req, res) {
