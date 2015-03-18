@@ -44,7 +44,7 @@ function dashService ($http, $q) {
 		console.log('im in the dashservice req.body')
 		$http({
 			method: 'POST',
-			url: '/api/tagPictures',
+			url: '/api/searchTagPictures',
 			data: tagInput
 				
 			

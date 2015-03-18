@@ -1,5 +1,6 @@
 var Pics = require('./../models/picModel');
 var User = require('./../models/userModel');
+var Tags = require('./../models/tagModel');
 var Mongoose = require('mongoose');
 
 module.exports = {
@@ -13,6 +14,49 @@ module.exports = {
 		
 		});
 	},
+
+    searchByTags: function(req, res) {
+    var tempArr = req.body.tags
+    var searchArr = []
+    console.log(tempArr)
+    for(var i =0; i < tempArr.length; i++) {
+        Tags.find({title: tempArr[i]})
+            .select("_id")
+            .exec()
+            .then(function(id) {
+                id.forEach(function(item) {
+                    searchArr.push(item._id)
+                    console.log(searchArr)
+                })
+            Pics.find({ "tags": { "$all": searchArr}})
+            .select('_id imageUrl upvotes tags')
+            .populate('tags')
+            .sort('-upvotes')
+            .limit(50)
+            .exec()
+            .then(function(results) {
+                res.status(200).json(results)
+            })
+            })
+    }
+
+}
+
+}
+//     get2: function(req, res) {
+//         console.log(req.body)
+//         Pics.find()
+//         .select('_id imageUrl upvotes tags')
+//         .populate('tags', null, req.body, {limit:50})
+//         .sort('-upvotes')
+//         .exec()
+//         .then(function(pics) {
+//             console.log('im in the get2 function')
+//             res.status(200).json(pics)
+//         })
+//     }
+
+// }
     // get: function(req, res) {
     //     Pics.find({})
     //         .select('_id imageUrl upvotes tags')
@@ -22,38 +66,6 @@ module.exports = {
     //         res.status(200).json(pics)
     //     });
     // },
-
-    get: function(req, res) {
-        Pics.find({})
-            .select('_id imageUrl upvotes tags')
-            .populate('tags')
-            .sort('-upvotes')
-            .exec()
-            .then(function(pics) {
-            res.status(200).json(pics)
-            })
-    },
-    get2: function(req, res) {
-        console.log(req.body)
-        Pics.find()
-        .select('_id imageUrl upvotes tags')
-        .populate('tags', null, req.body, {limit:50})
-        .sort('-upvotes')
-        .exec()
-        .then(function(pics) {
-            console.log('im in the get2 function')
-            res.status(200).json(pics)
-        })
-    }
-
-
-
-    	
-	    
-
-    
-
-}
 
 // get: function(req, res) {
 //         Pics.find({}).populate('tags', null, {title: {$all: ['football','basketball']}}).exec().then(function(queryResults) {
@@ -145,4 +157,4 @@ module.exports = {
 //====================
 
 //mongoose
-// query.where('tags').all(['ObjectId("54f5f7ee2bb94a9c18034bd1")', 'ObjectId("54f5f8042bb94a9c18034bd2")']) 
+// query.where('tags').all(['ObjectId("54f5f7ee2bb94a9c18034bd1")', 'ObjectId("54f5f8042bb94a9c18034bd2")'])
