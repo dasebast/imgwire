@@ -111,7 +111,7 @@ App.get('/api/pic', function(req, res) {
 	res.status(200).json(imgs);
 });
 App.post('/api/searchTagPictures', PicController.searchByTags);
-
+App.post('/api/searchSingleTag', PicController.searchSingleTag);
 
 App.get("/api/profile", isAuthed, UserController.profile);
 App.post('/api/auth', Passport.authenticate('local'), function(req, res) {
