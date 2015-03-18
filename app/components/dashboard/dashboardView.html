@@ -11,20 +11,30 @@
 	<button class='btn btn-submit' ng-click='vm.logout()'>logout</button>
 </div>
 
-<div>
-	<input class='text' ng-model='search' ng-trim='false'/>
-</div>
 
+<form role="form" class="loginform">
+<div class="form-group input-group">
+                
+                <input type="text" class="form-control" placeholder="tags" ng-model="tagInput">
+          </div>
+
+          <button type="button" class="btn btn-danger btn-md login" ng-click='vm.tagSearch(tagInput)'>submit</button>
+        </form>
 <div class='container'>
- <div class="row">
-    <div class="col-lg-2 col-sm-3 col-xs-4" ng-repeat='pics in vm.pictures'>
-             <img src={{pics.imageUrl}} class="thumbnail img-responsive">
+	<div class='row'>
+		<div class="col-lg-2 col-sm-3 col-xs-4" ng-repeat='pics in vm.pictures'>
+              <img src={{pics.imageUrl}} class="thumbnail img-responsive">
              <p ng-repeat='tag in pics.tags | filter:search'> {{pics.upvotes}} {{tag.title}} </p>
-             
+        </div>
     </div>
-</div>
-
+</div>        
 <div>
 	<img src='http://media.giphy.com/media/Qf9SNhYtaC4aQ/giphy.gif' width=50%>
 </div>
 
+
+<!-- <div class="col-lg-2 col-sm-3 col-xs-4" ng-repeat='pics in vm.pictures'>
+             <img src={{pics.imageUrl}} class="thumbnail img-responsive">
+             <p ng-repeat='tag in pics.tags | filter:search'> {{pics.upvotes}} {{tag.title}} </p>
+             
+    </div> -->

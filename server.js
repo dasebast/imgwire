@@ -44,7 +44,9 @@ App.use(BodyParser.json());
 // ============================ AUTHENTICATION ========================
 
 App.use(Session({
-	secret: '12345imgwire'
+	secret: '12345imgwire',
+	resave: true,
+	saveUninitialized: true
 }));
 
 App.use(Passport.initialize());
@@ -108,7 +110,32 @@ App.post('/api/pic', PicController.create);
 App.get('/api/pic', function(req, res) {
 	res.status(200).json(imgs);
 });
-App.get('/api/tagPictures', PicController.get2)
+App.post('/api/tagPictures', function(req, res) {
+	var tempArr = req.body.tags
+	var searchArr = []
+	console.log(tempArr)
+	for(var i =0; i < tempArr.length; i++) {
+		Tags.find({title: tempArr[i]})
+			.select("_id")
+			.exec()
+			.then(function(id) {
+				id.forEach(function(item) {
+					searchArr.push(item._id)
+					console.log(searchArr)
+				})
+			Pics.find({ "tags": { "$all": searchArr}})
+			.select('_id imageUrl upvotes tags')
+			.populate('tags')
+			.sort('-upvotes')
+			.limit(50)
+			.exec()
+			.then(function(results) {
+				res.status(200).json(results)
+			})
+			})
+	}
+
+})
 
 
 App.get("/api/profile", isAuthed, UserController.profile);
