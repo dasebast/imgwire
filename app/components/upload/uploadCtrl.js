@@ -4,15 +4,17 @@
 
 var photoAlbumControllers = angular.module('photoAlbumControllers', ['angularFileUpload']);
 
-photoAlbumControllers.controller('photoUploadCtrl', ['$scope', '$rootScope', '$routeParams', '$location', '$upload',
+photoAlbumControllers.controller('uploadCtrl', ['$scope', '$rootScope', '$location', '$upload',
   /* Uploading with Angular File Upload */
-  function($scope, $rootScope, $routeParams, $location, $upload) {
+  function($scope, $rootScope, $location, $upload) {
     $scope.$watch('files', function() {
       if (!$scope.files) return;
+      console.log("before for each")
       $scope.files.forEach(function(file){
+        console.log(file);
         $scope.upload = $upload.upload({
           url: "https://api.cloudinary.com/v1_1/" + $.cloudinary.config().cloud_name + "/upload",
-          data: {upload_preset: $.cloudinary.config().upload_preset, tags: 'myphotoalbum', context:'photo=' + $scope.title},
+          data: {upload_preset: $.cloudinary.config().upload_preset, context:'photo=' + $scope.title},
           file: file
         }).progress(function (e) {
           file.progress = Math.round((e.loaded * 100.0) / e.total);
@@ -21,6 +23,7 @@ photoAlbumControllers.controller('photoUploadCtrl', ['$scope', '$rootScope', '$r
             $scope.$apply();
           }
         }).success(function (data, status, headers, config) {
+          console.log("in success")
           $rootScope.photos = $rootScope.photos || [];
           data.context = {custom: {photo: $scope.title}};
           file.result = data;
