@@ -37,6 +37,26 @@ function dashService ($http, $q) {
 			console.log('error in getting the pics bro')
 		})
 		return dfd.promise
+	},
+	this.taggedPics = function(tagInput) {
+		console.log(tagInput)
+		var dfd = $q.defer();
+		console.log('im in the dashservice req.body')
+		$http({
+			method: 'POST',
+			url: '/api/tagPictures',
+			data: tagInput
+				
+			
+		})
+		.then(function(response) {
+			console.log(response.data)
+			dfd.resolve(response.data)
+		})
+		.catch(function(err) {
+			console.log('error in getting tagged pics')
+		})
+		return dfd.promise
 	}
 }
 })()
