@@ -36,11 +36,24 @@ module.exports = {
             .exec()
             .then(function(results) {
                 res.status(200).json(results)
+                })
             })
+        }
+
+    },
+    searchSingleTag: function(req, res) {
+        console.log(req.body)
+        Pics.find({ "tags": { "$all": [ req.body._id]}})
+            .select('_id imageUrl upvotes tags')
+            .populate('tags')
+            .sort('-upvotes')
+            .limit(50)
+            .exec()
+            .then(function(results) {
+                console.log(results)
+                res.status(200).json(results)
             })
     }
-
-}
 
 }
 //     get2: function(req, res) {
