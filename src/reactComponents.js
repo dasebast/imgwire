@@ -160,12 +160,13 @@ var ImageCloud = React.createClass({
       var styles = {
       img: {
         borderRadius: '12px',
-        border: '1px solid black',
+        border: '1px outset black',
         position: 'absolute',
         left: item.left,
         top: item.top,
         height: item.h,
         width: item.w,
+        boxShadow: '0px 8px 9px -3px rgba(80, 80, 73, 0.8)',
         zIndex: this.state.imgs[index].hovered ? 1000 : (this.state.imgs.length - index),
       }
     }
