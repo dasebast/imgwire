@@ -13,15 +13,39 @@ module.exports = {
 		
 		});
 	},
+    // get: function(req, res) {
+    //     Pics.find({})
+    //         .select('_id imageUrl upvotes tags')
+    //         .populate('tags')
+    //         .exec()
+    //         .then(function(pics) {
+    //         res.status(200).json(pics)
+    //     });
+    // },
+
     get: function(req, res) {
         Pics.find({})
             .select('_id imageUrl upvotes tags')
             .populate('tags')
+            .sort('-upvotes')
             .exec()
             .then(function(pics) {
             res.status(200).json(pics)
-        });
+            })
+    },
+    get2: function(req, res) {
+        console.log(req.body)
+        Pics.find()
+        .select('_id imageUrl upvotes tags')
+        .populate('tags', null, req.body, {limit:50})
+        .sort('-upvotes')
+        .exec()
+        .then(function(pics) {
+            console.log('im in the get2 function')
+            res.status(200).json(pics)
+        })
     }
+
 
 
     	

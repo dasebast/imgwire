@@ -51,6 +51,11 @@ function config ($stateProvider, $urlRouterProvider) {
 						// }
 					}	
 		})
+		.state('upload', {
+			url: '/upload',
+			templateUrl: '/components/upload/uploadView.html',
+			controller: 'uploadCtrl'
+		})
 
 		
 
