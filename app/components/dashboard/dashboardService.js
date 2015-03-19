@@ -27,7 +27,7 @@ function dashService ($http, $q) {
 		console.log('going to fetch the pictures')
 		$http({
 			method: 'GET',
-			url: '/api/pic'
+			url: '/api/userPics'
 		})
 		.then(function(response) {
 			console.log(response.data)

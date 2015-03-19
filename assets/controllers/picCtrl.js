@@ -26,7 +26,6 @@ module.exports = {
             .then(function(id) {
                 id.forEach(function(item) {
                     searchArr.push(item._id)
-                    console.log(searchArr)
                 })
             Pics.find({ "tags": { "$all": searchArr}})
             .select('_id imageUrl upvotes tags')
@@ -44,8 +43,8 @@ module.exports = {
     searchSingleTag: function(req, res) {
         console.log(req.body)
         Pics.find({ "tags": { "$all": [ req.body._id]}})
-            .select('_id imageUrl upvotes tags')
-            .populate('tags')
+            .select('_id imageUrl upvotes tags owner')
+            .populate('tags owner')
             .sort('-upvotes')
             .limit(50)
             .exec()

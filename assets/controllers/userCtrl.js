@@ -3,6 +3,7 @@ var Mongoose = require('mongoose');
 var Passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var Session = require('express-session');
+var Pics = require('./../models/picModel');
 
 Passport.use(new LocalStrategy({
 	usernameField: 'email',
@@ -48,7 +49,21 @@ module.exports = {
 	},
 
 	profile: function(req, res) {
-		console.log(req.user + 'im in the server profile')
+
 		return res.json(req.user)
+	},
+
+	getUserPics: function(req, res) {
+		Pics.find({ "owner": { "$all": [ req.user._id]}})
+			.select('_id imageUrl upvotes tags owner')
+            .populate('tags owner')
+            .sort('-upvotes')
+            .limit(50)
+            .exec()
+            .then(function(results) {
+            	console.log(results)
+            	res.status(200).json(results)
+            })
 	}
+
 }
