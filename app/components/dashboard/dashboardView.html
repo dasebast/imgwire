@@ -31,9 +31,15 @@
         </div>
     </div>
 </div>        
-<div>
-	<img src='http://media.giphy.com/media/Qf9SNhYtaC4aQ/giphy.gif' width=50%>
-</div>
+
+<div class='container'>
+  <div class='row'>
+    <div class="col-lg-2 col-sm-3 col-xs-4" ng-repeat='stuff in vm.userPictures'>
+              <img src={{stuff.imageUrl}} class="thumbnail img-responsive">
+             <p ng-repeat='tag in stuff.tags | filter:search'> {{stuff.upvotes}} {{tag.title}}  {{stuff.owner.username}}</p>
+        </div>
+    </div>
+</div>    
 
 
 <!-- <div class="col-lg-2 col-sm-3 col-xs-4" ng-repeat='pics in vm.pictures'>

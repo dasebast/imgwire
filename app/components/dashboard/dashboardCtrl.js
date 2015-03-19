@@ -4,9 +4,10 @@ angular
 	.module('imgwire')
 	.controller('dashCtrl', dashCtrl);
 
- function dashCtrl(dashService, $location, app) {
+ function dashCtrl(dashService, $location, app, userPictures) {
  	var vm = this;
  	vm.app = app
+ 	vm.userPictures = userPictures
  	//vm.pictures = pictures
  	vm.test = 'your logged in!!! yay!'
  	vm.logout = function() {

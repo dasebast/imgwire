@@ -76,11 +76,13 @@ Passport.use(new LocalStrategy({
 
 Passport.serializeUser(function(user, done) {
 	//input user model (mongoose)
+	console.log(user)
 	done(null, user);
 });
 
 Passport.deserializeUser(function(obj, done) {
 	//user object (json)
+	console.log(obj._id)
 	done(null, obj);
 });
 
@@ -104,6 +106,7 @@ App.get('/api/tags', TagsController.get);
 
 App.post('/api/user', UserController.create);
 App.get('/api/user', UserController.get);
+App.get('/api/userPics', isAuthed, UserController.getUserPics)
 
 App.post('/api/pic', PicController.create);
 
