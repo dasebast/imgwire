@@ -4,14 +4,14 @@ angular
 	.module('imgwire')
 	.controller('dashCtrl', dashCtrl);
 
- function dashCtrl(dashService, $location, app, userPictures) {
+ function dashCtrl(dashService, $location, app, userPictures, signupService) {
  	var vm = this;
  	vm.app = app
  	vm.userPictures = userPictures
  	//vm.pictures = pictures
  	vm.test = 'your logged in!!! yay!'
  	vm.logout = function() {
- 		dashService.logMeOut().then(function() {
+ 		signupService.logMeOut().then(function() {
  			$location.path('/')
  		})
  	};
