@@ -1,0 +1,30 @@
+<img id="logo" src="/img/fotoverse-logo-small.png"></img>
+
+<div class="loginRegister">
+	<input class="inputBox" type="text" placeholder="username"/>
+	<input class="inputBox" type="password" placeholder="password"/>
+	<br />
+</div>
+{{vm.test}}
+<div>
+	<button class="btn" ng-hide="true">Dashboard</button>
+</div>
+
+<div>
+	<button class="btn" ng-hide="true">Sign Out</button>
+</div>
+
+<div id="searchBarContainer">
+	<input id="searchBar" class="inputBox" type="text" placeholder="explore the fotoverse..."
+</div>
+
+<!-- Logo
+
+Sign-up / Register (can switch between)
+	-hide when signed in (ng-hide="$root.currentUser.username")
+
+Dashboard
+	-after signed in (ng-show="$root.currentUser.username")
+
+Logout (bottom)
+	-after signed in -->
