@@ -1,5 +1,80 @@
-body {		
-		background-color: #FAFAFA;
+html, body, body.ng-scope {		
+ padding: 5px;
+ height: 100%;
+ width: 100%;
+ margin: 0;
+ background: #212121;
+ overflow: hidden;
+}
+
+#logo {
+	width: 80%;
+	height: auto;
+	margin-bottom: 20px;
+}
+
+#searchBarContainer {
+	width: 100%;
+	position: absolute;
+	top: 10px;
+	left: 15%;
+}
+
+.inputBox {
+	border: none;
+	width: 80%;
+	background: #405053;
+	margin: 0 auto 8px auto;
+	color: #efe;
+	border-bottom: 3px solid black;
+	border-right: 1px solid black;
+}
+
+#searchBar {
+	width: 180px;	
+}
+
+canvas {
+	position: absolute;
+	top: 5%;
+	left: 20%;
+	padding: 5px;
+}
+
+#main {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+}
+
+#sidebar {
+	padding: 5px;
+	box-sizing: border-box;
+	height: 100%;
+	width: 20%;
+	order: 1;
+	flex-grow: 1;
+}
+
+#ui, #ui.ng-scope {
+	top: 5%;
+	order: 2;
+	box-sizing: border-box
+	flex-grow: 4;
+	height: 100%;
+	width: 80%;
+	padding: 5px;
+}
+
+div > #viewPort {
+	top: 5%;
+	height: 95%;
+	width: 95%;
+	padding: 10px;
+	margin: 10px;
 }
 
 .box {
@@ -10,18 +85,11 @@ body {
 	visibility: visible;
 	opacity: 1;
 	transform: scale(1);
-	transition: transform 40ms ease-out;
+	transition: transform 30ms ease-out;
 }
 
 .box:hover {
 	transform: scale(1.32);
+	border: 20px solid black;
 }
 
-#viewPort {
-	padding: 10px;
-}
-
-
-header {
-	margin-bottom: 5px;
-}

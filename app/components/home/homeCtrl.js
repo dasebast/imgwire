@@ -26,8 +26,6 @@ function HomeCtrl (homeService, getImgs, getTags, imageCloudService, $scope) {
     console.log(id);
   };
 
-
-
 }
 
 })();
