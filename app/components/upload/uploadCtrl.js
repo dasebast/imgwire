@@ -19,7 +19,7 @@ photoAlbumControllers.controller('uploadCtrl', ['$scope', '$rootScope', '$locati
           file: file
         }).progress(function (e) {
           file.progress = Math.round((e.loaded * 100.0) / e.total);
-          file.status = "Uploading... " + file.progress + "%";
+          file.status = "Uploading... " + File.progress + "%";
           if(!$scope.$$phase) {
             $scope.$apply();
           }
@@ -27,7 +27,7 @@ photoAlbumControllers.controller('uploadCtrl', ['$scope', '$rootScope', '$locati
           console.log("in success")
           $rootScope.photos = $rootScope.photos || [];
           data.context = {custom: {photo: $scope.title}};
-          file.result = data;
+          File.result = data;
           $rootScope.photos.push(data);
           if(!$scope.$$phase) {
             $scope.$apply();
