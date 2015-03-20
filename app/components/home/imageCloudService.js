@@ -6,7 +6,19 @@ angular
 
 
 function imageCloudService ($q) {
+var that = this;
 
+var formattedImgArr = [];
+
+	this.getImgs = function () {
+		var dfd = $q.defer();
+		if (formattedImgArr.length) {
+			dfd.resolve(formattedImgArr);
+		} else {
+			dfd.reject('no images')
+		}
+		return dfd.promise;
+	}
 
 // imgs [{id, url, likes, tags []}]
 this.imageCloud = function (imgs) {
@@ -180,28 +192,28 @@ var bounds;
 var viewPort = {};
 viewPort.w = $(window).width() - $('#sidebar').width();
 console.log(viewPort.w);
-viewPort.h = $('#viewPort').height();
+viewPort.h = $(window).height() - $('#spacer').height();
 console.log(viewPort.h);
 var canvas = document.getElementById('cloud');
 var ctx = canvas.getContext('2d');
 ctx.canvas.height = viewPort.h;
 ctx.canvas.width = viewPort.w;
-var topOffset = $('#viewPort').position().top + 30; 
+var topOffset = $('#spacer').height();
 console.log('topOffset: ' + topOffset);
-var leftOffset = $('#viewPort').position().left;
+var leftOffset = $('#sidebar').width();
 console.log('leftOffset: '+ leftOffset);
 var xCenter =(viewPort.w/2) + leftOffset;
 var yCenter =(viewPort.h/2) + topOffset;
 var ratio = viewPort.w/viewPort.h;
 var	bounds = {
-			'x': leftOffset + overlap,
-			'y': topOffset + overlap,
-			'w': leftOffset + viewPort.w - overlap,
-			'h': topOffset + viewPort.h - overlap
+			'x': leftOffset,
+			'y': topOffset,
+			'w': leftOffset + viewPort.w,
+			'h': topOffset + viewPort.h
 }
-var maxWidth = viewPort.w*(0.38);
+var maxWidth = viewPort.w*(0.35);
 var minWidth = 70;
-var maxHeight = viewPort.h*(0.43);
+var maxHeight = viewPort.h*(0.40);
 var minHeight = 50;
 var overlap = 6;
 var minLikes = getMinOfArray(tempImgs);
@@ -237,8 +249,9 @@ for (var i = 3; i < tempImgs.length; i++) {
 				tempImgs[i] = imgObjWithPosition;
 			});
 		}
+		formattedImgArr = tempImgs;
 
-		dfd.resolve(tempImgs);
+		dfd.resolve(formattedImgArr);
 
 return dfd.promise;
 }; //end imageCloud 

@@ -134,14 +134,11 @@ var ImageCloud = React.createClass({
     var fullUrl = url.split('/c_fill,h_200,w_300').join('');
     return fullUrl;
   },
-  openModal: function (url, id, top, left) {
-    console.log(id);
-    console.log('top: '+ top);
-    console.log('left: '+ left);
+  openModal: function (url, id, top, left, hovered) {
+    console.log(hovered);
     var newUrl = this.formatUrl(url);
     this.setState({
-      modalUrl: newUrl,
-      clicked: !clicked
+      modalUrl: newUrl
     })
   },
   closeModal: function () {
@@ -164,6 +161,7 @@ var ImageCloud = React.createClass({
     var mapImageCloud = !this.state.imgs ? null : this.state.imgs.map( (item, index) => {
       var styles = {
       img: {
+        background: '#212121',
         borderRadius: '5px',
         border: this.state.imgs[index].hovered ? '8px solid black' : '1px solid black',
         position: 'absolute',
@@ -172,12 +170,12 @@ var ImageCloud = React.createClass({
         height: item.h,
         width: item.w,
         boxShadow: '0px 7px 0px -3px rgba(30,30,30,.5)',
-        zIndex: this.state.imgs[index].hovered ? 1000 : (this.state.imgs.length - index),
+        zIndex: this.state.imgs[index].hovered ? 1000 : (this.state.imgs.length - index)
       }
     }
       return (
 
-            <img key={item.id} imgs={this.state.imgs} className="box" style={styles.img} src={item.url} height={item.h} width={item.w} onMouseEnter={this.setHover.bind(null, index)} onMouseLeave={this.removeHover.bind(null, index)} onClick={this.openModal.bind(null, item.url, item.id, item.top, item.left)} close={this.closeModal} />
+            <img key={item.id} imgs={this.state.imgs} className="animated fadeInRight box" style={styles.img} src={item.url} height={item.h} width={item.w} onMouseEnter={this.setHover.bind(null, index)} onMouseLeave={this.removeHover.bind(null, index)} onClick={this.openModal.bind(null, item.url, item.id, item.top, item.left, item.hovered)} close={this.closeModal} />
       )
     });
 

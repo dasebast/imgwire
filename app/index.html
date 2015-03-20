@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/components/upload/uploadAppStyles.css">
 	<link rel="stylesheet" href="/components/upload/uploadAnimationsStyles.css">
+	<link rel="stylesheet" href="/css/animate.css">
 	<link rel="stylesheet" href="/css/styles.css">
 
 
@@ -20,7 +21,7 @@
 <body ng-app="imgwire">
 
 <div id="main">
-		<div id="sidebar" ng-include src="'tpl/sidebar.html'"></div>
+		<div id="sidebar" ng-controller="sidebarCtrl as vm" ng-include src="'/components/sidebar/sidebarView.html'"></div>
 		<div ui-view id="ui"></div>
 </div>
 
@@ -30,6 +31,7 @@
 <script src="/node_modules/ngReact/ngReact.js"></script>
 <script src="/app.module.js"></script>
 <script src="/app.routes.js"></script>
+<script src="/components/sidebar/sidebarCtrl.js"></script>
 <script src="/components/home/HomeCtrl.js"></script>
 <script src="/components/login/loginCtrl.js"></script>
 <script src="/components/login/loginService.js"></script>

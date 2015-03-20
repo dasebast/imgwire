@@ -5,6 +5,12 @@ html, body, body.ng-scope {
  margin: 0;
  background: #212121;
  overflow: hidden;
+ font-size: 12px;
+}
+
+#spacer {
+	height: 30px;
+	width: 100%;
 }
 
 #logo {
@@ -13,11 +19,20 @@ html, body, body.ng-scope {
 	margin-bottom: 20px;
 }
 
+#logo:hover {
+/* 	-webkit-animation-name: hovershake;
+  animation-name: hovershake; */
+}
+
+.label {
+	font-size: 1.2rem;
+}
+
 #searchBarContainer {
 	width: 100%;
 	position: absolute;
 	top: 10px;
-	left: 15%;
+	left: 20%;
 }
 
 .inputBox {
@@ -33,6 +48,7 @@ html, body, body.ng-scope {
 #searchBar {
 	width: 180px;	
 }
+
 
 canvas {
 	position: absolute;
@@ -79,17 +95,23 @@ div > #viewPort {
 
 .box {
     position: absolute; 
-/* 	border: 1px solid black; */
 	border-radius: 12px;
-	background: rgba(255,255,255,1);
-	visibility: visible;
-	opacity: 1;
 	transform: scale(1);
-	transition: transform 30ms ease-out;
+	transition: transform 80ms linear;
 }
 
 .box:hover {
+	-webkit-animation-duration: 80ms;
+  animation-duration: 80ms;
+  -webkit-animation-fill-mode: none;
+  animation-fill-mode: none;
 	transform: scale(1.32);
 	border: 20px solid black;
+	cursor: alias;
 }
+
+.cursor-hand {
+	cursor: pointer;
+}
+
 
