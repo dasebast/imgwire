@@ -108,7 +108,8 @@ var ImageCloud = React.createClass({
     return {
       imgs: this.props.imgs,
       /*{modalHidden: true,}*/
-      modalUrl: ''
+      modalUrl: '',
+      clicked: false
     }
   },
   componentDidMount: function () {
@@ -133,7 +134,8 @@ var ImageCloud = React.createClass({
     var fullUrl = url.split('/c_fill,h_200,w_300').join('');
     return fullUrl;
   },
-  openModal: function (url) {
+  openModal: function (url, id, top, left, hovered) {
+    console.log(hovered);
     var newUrl = this.formatUrl(url);
     this.setState({
       modalUrl: newUrl
@@ -159,20 +161,21 @@ var ImageCloud = React.createClass({
     var mapImageCloud = !this.state.imgs ? null : this.state.imgs.map( (item, index) => {
       var styles = {
       img: {
-        borderRadius: '12px',
-        border: '1px outset black',
+        background: '#212121',
+        borderRadius: '5px',
+        border: this.state.imgs[index].hovered ? '8px solid black' : '1px solid black',
         position: 'absolute',
         left: item.left,
         top: item.top,
         height: item.h,
         width: item.w,
-        boxShadow: '0px 8px 9px -3px rgba(80, 80, 73, 0.8)',
-        zIndex: this.state.imgs[index].hovered ? 1000 : (this.state.imgs.length - index),
+        boxShadow: '0px 7px 0px -3px rgba(30,30,30,.5)',
+        zIndex: this.state.imgs[index].hovered ? 1000 : (this.state.imgs.length - index)
       }
     }
       return (
 
-            <img key={item.id} imgs={this.state.imgs} className="box" style={styles.img} src={item.url} height={item.h} width={item.w} onMouseEnter={this.setHover.bind(null, index)} onMouseLeave={this.removeHover.bind(null, index)} onClick={this.openModal.bind(null, item.url)} close={this.closeModal} />
+            <img key={item.id} imgs={this.state.imgs} className="animated fadeInRight box" style={styles.img} src={item.url} height={item.h} width={item.w} onMouseEnter={this.setHover.bind(null, index)} onMouseLeave={this.removeHover.bind(null, index)} onClick={this.openModal.bind(null, item.url, item.id, item.top, item.left, item.hovered)} close={this.closeModal} />
       )
     });
 
