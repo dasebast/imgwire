@@ -11,14 +11,13 @@ photoAlbumControllers.controller('uploadCtrl', ['$scope', '$rootScope', '$locati
       if (!$scope.files) return;
       console.log("before for each")
       $scope.files.forEach(function(file){
-        console.log(file);
         $scope.upload = $upload.upload({
           url: "https://api.cloudinary.com/v1_1/" + $.cloudinary.config().cloud_name + "/upload",
-          data: {upload_preset: $.cloudinary.config().upload_preset, context:'photo=' + $scope.title},
+          fields: {upload_preset: $.cloudinary.config().upload_preset, context:'photo=' + $scope.title},
           file: file
         }).progress(function (e) {
           file.progress = Math.round((e.loaded * 100.0) / e.total);
-          file.status = "Uploading... " + file.progress + "%";
+          file.status = "Uploading... " + File.progress + "%";
           if(!$scope.$$phase) {
             $scope.$apply();
           }
@@ -26,12 +25,14 @@ photoAlbumControllers.controller('uploadCtrl', ['$scope', '$rootScope', '$locati
           console.log("in success")
           $rootScope.photos = $rootScope.photos || [];
           data.context = {custom: {photo: $scope.title}};
-          file.result = data;
+          File.result = data;
           $rootScope.photos.push(data);
           if(!$scope.$$phase) {
             $scope.$apply();
           }
-        });
+        }).catch(function(err) {
+          console.log(err, 'this is the eeror in the file upload')
+        })
       });
     });
 

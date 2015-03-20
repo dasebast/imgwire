@@ -51,7 +51,7 @@ function signupService($q, $http, $rootScope) {
 			method: 'GET',
 			url: '/api/logout'
 		}).then(function(response) {
-			currentUser = {}
+			currentUser = {};
 			deferred.resolve(response.data);
 		});
 		return deferred.promise;
