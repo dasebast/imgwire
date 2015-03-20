@@ -32,15 +32,9 @@ photoAlbumControllers.controller('uploadCtrl', ['$scope', '$rootScope', '$locati
           if(!$scope.$$phase) {
             $scope.$apply();
           }
-<<<<<<< HEAD
-        }).catch(function(err) {
-          console.log(err, 'this is the eeror in the file upload')
-        })
-=======
         }).catch(function(err){
             console.log(err, 'this is the error in the file upload');
         });
->>>>>>> 2bc6baee741eb3353931cc32c387c8e26597744f
       });
     });
 
