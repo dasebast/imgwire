@@ -49,8 +49,12 @@ module.exports = {
 	},
 
 	profile: function(req, res) {
-
-		return res.json(req.user)
+		User.findById(req.user._id)
+			.select('_id username email')
+			.exec()
+			.then(function(results) {
+				res.status(200).json(results)
+			})
 	},
 
 	getUserPics: function(req, res) {

@@ -9,19 +9,6 @@ function dashService ($http, $q) {
 		console.log('im in the dashService')
 	},
 
-	this.logMeOut = function() {
-		var deferred = $q.defer();
-		console.log('logout almost resovlved')
-		$http({
-			method: 'GET',
-			url: '/api/logout'
-		}).then(function(response) {
-			console.log('logout promise resolved')
-			deferred.resolve(response.data);
-		});
-		return deferred.promise;
-	},
-
 	this.getPictures = function() {
 		var dfd = $q.defer();
 		console.log('going to fetch the pictures')

@@ -6,7 +6,19 @@ angular
 
 
 function imageCloudService ($q) {
+var that = this;
 
+var formattedImgArr = [];
+
+	this.getImgs = function () {
+		var dfd = $q.defer();
+		if (formattedImgArr.length) {
+			dfd.resolve(formattedImgArr);
+		} else {
+			dfd.reject('no images')
+		}
+		return dfd.promise;
+	}
 
 // imgs [{id, url, likes, tags []}]
 this.imageCloud = function (imgs) {
@@ -136,11 +148,13 @@ var checkCollision = function (rect, bounds) {
 		      			ctx.beginPath();
 						ctx.moveTo(x, y);
 						ctx.lineTo(x-shiftX,y);
+						/*ctx.stroke();*/
 						x = x-shiftX;
 					} else {
 						ctx.beginPath();
 						ctx.moveTo(x, y);
 						ctx.lineTo(x,y-shiftY);
+						/*ctx.stroke();*/
 						y = y-shiftY;
 					}
 					//console.log('after', x, y)
@@ -156,7 +170,10 @@ var checkCollision = function (rect, bounds) {
 					var doesCollide = checkCollision(potentialImg, bounds);
 							if (!doesCollide) {
 						//console.log('Image fits at: (x, y) (' + potentialImg.x + ',' + potentialImg.y + ').');
-						filledImgs.push(potentialImg);
+						filledImgs.push({ 'x': potentialImg.x,
+															'y': potentialImg.y,
+															'w': potentialImg.w,
+															'h': potentialImg.h});
 						//console.log(filledImgs);
 						imgObj.top = potentialImg.y;
 						imgObj.left = potentialImg.x;
@@ -170,51 +187,57 @@ var checkCollision = function (rect, bounds) {
 
 //function start		
 
-
 var filledImgs = [];
 var bounds;
-var viewPort = {}; 
-viewPort.w = $('#viewPort').width();
-viewPort.h = $('#viewPort').height();
+var viewPort = {};
+viewPort.w = $(window).width() - $('#sidebar').width();
+console.log(viewPort.w);
+viewPort.h = $(window).height() - $('#spacer').height();
+console.log(viewPort.h);
 var canvas = document.getElementById('cloud');
 var ctx = canvas.getContext('2d');
 ctx.canvas.height = viewPort.h;
 ctx.canvas.width = viewPort.w;
-var topOffset = $('#viewPort').position().top; 
-var leftOffset = $('#viewPort').position().left;
-var xCenter =($('#viewPort').width()/2);
-var yCenter =($('#viewPort').height()/2);
-var ratio = ($('#viewPort').width()/$('#viewPort').height())*1.2;
+var topOffset = $('#spacer').height();
+console.log('topOffset: ' + topOffset);
+var leftOffset = $('#sidebar').width();
+console.log('leftOffset: '+ leftOffset);
+var xCenter =(viewPort.w/2) + leftOffset;
+var yCenter =(viewPort.h/2) + topOffset;
+var ratio = viewPort.w/viewPort.h;
 var	bounds = {
-			'x': leftOffset + overlap,
-			'y': topOffset + overlap,
-			'w': leftOffset + $('#viewPort').width() - overlap,
-			'h': topOffset + $('#viewPort').height() - overlap
+			'x': leftOffset,
+			'y': topOffset,
+			'w': leftOffset + viewPort.w,
+			'h': topOffset + viewPort.h
 }
-var maxWidth = viewPort.w*(3/7);
-var minWidth = 60;
-var maxHeight = viewPort.h*(3/7);
-var minHeight = 40;
-var overlap = 8;
+var maxWidth = viewPort.w*(0.35);
+var minWidth = 70;
+var maxHeight = viewPort.h*(0.40);
+var minHeight = 50;
+var overlap = 6;
 var minLikes = getMinOfArray(tempImgs);
 var maxLikes = getMaxOfArray(tempImgs);
 setSizes(tempImgs);
 
 
-tempImgs[0].top = viewPort.h/2 - (tempImgs[0].h/2);
-tempImgs[0].left = viewPort.w/2 - (tempImgs[0].w/2);
+tempImgs[0].top = topOffset + viewPort.h/2 - (tempImgs[0].h/2);
+tempImgs[0].left = leftOffset + viewPort.w/2 - (tempImgs[0].w/2);
+console.log(tempImgs[0].left)
 filledImgs.push({   'x': tempImgs[0].left,
 								'y': tempImgs[0].top,
 								'w': tempImgs[0].w,
 								'h': tempImgs[0].h})
 tempImgs[1].top = viewPort.h/2 - (tempImgs[1].h/2);
 tempImgs[1].left = tempImgs[0].left + tempImgs[0].w - 15;
+console.log(tempImgs[1].left)
 filledImgs.push({   'x': tempImgs[1].left,
 								'y': tempImgs[1].top,
 								'w': tempImgs[1].w,
 								'h': tempImgs[1].h})
 tempImgs[2].top = viewPort.h/2 - (tempImgs[2].h/2);
 tempImgs[2].left = tempImgs[0].left + 15 - tempImgs[2].w;
+console.log(tempImgs[2].left)
 filledImgs.push({   'x': tempImgs[2].left,
 								'y': tempImgs[2].top,
 								'w': tempImgs[2].w,
@@ -226,8 +249,9 @@ for (var i = 3; i < tempImgs.length; i++) {
 				tempImgs[i] = imgObjWithPosition;
 			});
 		}
+		formattedImgArr = tempImgs;
 
-		dfd.resolve(tempImgs);
+		dfd.resolve(formattedImgArr);
 
 return dfd.promise;
 }; //end imageCloud 
