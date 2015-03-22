@@ -68,7 +68,7 @@ html, body, body.ng-scope {
 }
 
 .btn-orange {
-	background: rgb(95%, 45%, 22%);
+	background: #f4753a;
 	color: white;
 	margin-right: 10px;
 	transition: transform 100ms linear;
@@ -78,6 +78,10 @@ html, body, body.ng-scope {
 	transform: scale(1.05);
 	box-shadow: 2px 2px 2px 2px black;
 	color: white;
+}
+
+.btn-search {
+	height: 50%;
 }
 
 /*viewport styles*/
@@ -131,6 +135,10 @@ div > #viewPort {
 	transform: scale(1.32);
 	border: 20px solid black;
 	cursor: alias;
+}
+
+.high-contrast-text {
+	color: white;
 }
 
 

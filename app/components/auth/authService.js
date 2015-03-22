@@ -23,10 +23,7 @@
 			}
 		})
 		.then(function(response) {
-			console.log(response)
 			currentUser = response.data;
-			$rootScope.currentUser = currentUser;
-			console.log('login service response')
 			dfd.resolve(response.data)
 		})
 		.catch(function(err) {
@@ -34,12 +31,12 @@
 			dfd.reject(err);
 		});
 		return dfd.promise
-	}
+	};
 
 	this.signupUser = function(obj) {
 		var dfd = $q.defer();
 		$http ({
-			method: 'Post',
+			method: 'POST',
 			url: '/api/user',
 			data: {
 				username: obj.username,
@@ -48,7 +45,6 @@
 			}
 		})
 		.then(function(response) {
-			console.log(response + "sign up response")
 			dfd.resolve(response.data)
 		})
 		.catch(function(err) {
@@ -56,20 +52,19 @@
 			dfd.reject(err);
 		})
 		return dfd.promise
-	}
+	};
 
 	this.logMeOut = function() {
 		var deferred = $q.defer();
-		console.log('logout almost resovlved')
 		$http({
 			method: 'GET',
 			url: '/api/logout'
 		}).then(function(response) {
-			currentUser = {}
+			currentUser = {};
 			deferred.resolve(response.data);
 		});
 		return deferred.promise;
-	}
+	};
 
 	this.getProfile = function() {
 		var deferred = $q.defer();
@@ -84,7 +79,7 @@
 			deferred.resolve(response.data);
 		});
 		return deferred.promise;
-	}
+	};
 
 
 	}

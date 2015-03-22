@@ -1,7 +1,7 @@
 
 <a href='#/home'><img id="logo" class="animated zoomIn"src="/img/fotoverse-logo-small.png"></img></a>
 
-<div class="loginRegister animated fadeInLeft">
+<div class="loginRegister animated fadeInLeft" ng-show="!vm.loggedIn">
 	<form class="loginPanel" name="loginRegisterForm">
 		<label class="label" for="username" ng-show="vm.register">Register<br /></label>
 
@@ -22,6 +22,10 @@
 	</form>
 </div>
 
+<div ng-show="vm.loggedIn">
+	<p class="high-contrast-text">{{vm.message}}{{$root.currentUser.username}}</p>
+	<button class="btn btn-orange" ng-click="vm.logMeOut()">Logout</button>
+</div>
 
 <div>
 	<button class="btn" ng-hide="true">Dashboard</button>
@@ -33,7 +37,11 @@
 
 <!--Search (top)-->
 <div id="searchBarContainer" class="animated fadeInDown">
-		<input id="searchBar" class="inputBox" type="search" placeholder="explore the fotoverse..." />
+		<input id="searchBar" class="inputBox" type="search" placeholder="explore the fotoverse..." ng-model="vm.searchTags" />
+		<button class="btn btn-small btn-orange btn-search" ng-click="vm.searchByTags(vm.searchTags)">Search</button>
+		<div ng-repeat="tag in vm.tags">
+			<button class="btn btn-small btn-orange" ng-click="">{{tag.title}}</button>
+		</div>
 </div>
 
 <!-- Logo

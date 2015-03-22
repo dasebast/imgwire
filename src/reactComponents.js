@@ -116,12 +116,11 @@ var ImageCloud = React.createClass({
       imgs: this.props.imgs
     })
   },
-/*{  componentWillReceiveProps: function(nextProps) {
-    console.log(nextProps);
+  componentWillReceiveProps: function(nextProps) {
     this.setState({
-      imgs: nextProps
+      imgs: nextProps.imgs
     })
-  },}*/
+  },
   setHover: function (index) {
     var tempState = this.state.imgs;
     tempState[index].hovered = true;
@@ -194,7 +193,6 @@ var ImageCloud = React.createClass({
   <ImageCloud />,
   document.getElementById('imgCloud'));}
 */
-console.log('reactComponents I am in you');
 angular
   .module('imgwire')
   .value('ImageCloud', ImageCloud)

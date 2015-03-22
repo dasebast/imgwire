@@ -13,12 +13,18 @@ function HomeCtrl (homeService, getImgs, getTags, imageCloudService, $scope, $ro
   vm.tags = getTags;
   vm.imgs = getImgs;
 
+  $rootScope.$on('rootScope:emit', function(event, data) {
+    imageCloudService.imageCloud(data)
+      .then(function(res) {
+        vm.imgs = res;
+        $scope.imgs = {imgs: vm.imgs};
+      })
+  });
+
 
   imageCloudService.imageCloud(vm.imgs)
     .then(function(res) {
-      console.log(res);
       vm.imgs = res;
-      $rootScope.imgs = vm.imgs;
       $scope.imgs = {imgs: vm.imgs};
     });
 

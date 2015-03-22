@@ -4,37 +4,69 @@
 		.module('imgwire')
 		.controller('sidebarCtrl', sidebarCtrl);
 
-		function sidebarCtrl (authService, imageCloudService){
+		function sidebarCtrl (authService, homeService, $rootScope){
 			var vm = this;
 			vm.register = false;
+			vm.loggedIn = false;
+			vm.tags = [];
+			vm.searchTags = '';
+			vm.userLoginInfo = {};
+			vm.message = "Hello, ";
 
-			vm.userLoginInfo = {}
+			vm.imgs = homeService.getPics().then(function(imgs) {
+				$rootScope.imgs = imgs;
+			})
 
 
 
 	vm.login = function(obj) {
 
-		console.log(obj);
-		vm.userLoginInfo = {};
-		/*authService.loginUser(obj).then(function(res) {
-			//TODO after login actions
+		authService.loginUser(obj).then(function(res) {
+			$rootScope.currentUser = res;
+			vm.loggedIn = true;
+			vm.userLoginInfo = {};
 		})
 		.catch(function(err) {
 			console.log(err)
-		});*/
+		});
 	}
 
 	vm.signup = function(obj) {
-		console.log(obj);
 		
 		authService.signupUser(obj).then(function(res) {
-			console.log(res);
+			$rootScope.currentUser = res;
+			vm.loggedIn = true;
 			vm.userLoginInfo = {};
-			//TODO login?
 		}).catch(function(err) {
 			console.log(err)
-	});
-}
+		});
+	}
+
+	vm.logMeOut = function() {
+		authService.logMeOut().then(function(res) {
+			vm.register = false;
+			vm.loggedIn = false;
+			$rootScope.currentUser = {};
+		})
+	}
+
+	vm.searchByTags = function(searchTags) {
+		if (searchTags) {
+			var tagArray = searchTags.split(' ');
+			//TODO get tags from DB and push to vm.tags
+		
+			homeService.getTags(searchTags).then(function(res) {
+				console.log(res);
+				tagsFromDB = res;
+				homeService.searchByTags(tagArray).then(function(newImgs) {
+					console.log(newImgs);
+					$rootScope.$emit('rootScope:emit', newImgs);
+				})
+				
+			})
+
+		}
+	}
 
 		}
 })();
