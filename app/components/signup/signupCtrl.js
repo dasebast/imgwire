@@ -7,7 +7,7 @@ angular
 function signupCtrl (signupService, $location) {
 	var vm = this;
 
-	vm.signup = function(obj) {
+/*	vm.signup = function(obj) {
 		console.log('im running' + obj.username)
 	signupService.signupUser(obj).then(function(res) {
 		console.log(res)
@@ -16,7 +16,7 @@ function signupCtrl (signupService, $location) {
 		console.log(err)
 	});
 
-}
+}*/
 	//signupService.getData();
 }
 

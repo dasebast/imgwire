@@ -8,7 +8,7 @@ function loginCtrl(loginService, $location) {
 	var vm = this;
 
 	vm.test = 'this is the loginCtrl'
-	vm.login = function(obj) {
+/*	vm.login = function(obj) {
 		loginService.loginUser(obj).then(function(res) {
 			console.log('promise has returned')
 			$location.path('/dashboard')
@@ -16,7 +16,7 @@ function loginCtrl(loginService, $location) {
 		.catch(function(err) {
 			console.log(err)
 		});
-	}
+	}*/
 	
 }
 
