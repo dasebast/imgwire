@@ -16,7 +16,7 @@
 						tempArr.push({
 										//TODO get the right key names
 										'id': res.data[i]._id,
-										'url': res.data[i].objUrl,
+										'url': res.data[i].imageUrl,
 										'likes': res.data[i].upvotes
 						})
 					};
@@ -32,7 +32,35 @@
 			.then(function(res) {
 				dfd.resolve(res.data);
 			})
-			return dfd.promise;
+		return dfd.promise;
+	}
+
+	this.searchByTags = function(searchTags) {
+		var dfd = $q.defer();
+		console.log(searchTags);
+
+		$http({
+			method: 'POST',
+			url: apiUrl + '/searchTagPictures',
+			data: {
+				tags: searchTags
+			}
+		})
+			.then(function(res) {
+				var tempArr = [];
+					for (var i = 0; i < res.data.length; i++){
+						tempArr.push({
+										//TODO get the right key names
+										'id': res.data[i]._id,
+										'url': res.data[i].imageUrl,
+										'likes': res.data[i].upvotes,
+										'tags': res.data[i].tags
+						})
+					};
+				dfd.resolve(tempArr);
+			})
+
+		return dfd.promise;
 	}
 
 

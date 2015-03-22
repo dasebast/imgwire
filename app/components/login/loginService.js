@@ -9,7 +9,7 @@ angular
 			console.log('im in the service')
 		}
 
-		this.loginUser = function(obj) {
+/*		this.loginUser = function(obj) {
 			var dfd = $q.defer();
 			$http ({
 				method: 'Post',
@@ -28,6 +28,6 @@ angular
 				dfd.reject(err);
 			});
 			return dfd.promise
-		}
+		}*/
 	}
 })();

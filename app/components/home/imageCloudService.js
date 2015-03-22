@@ -28,7 +28,6 @@ this.imageCloud = function (imgs) {
 		 		objArr.sort(function(a, b) {
 		 			return b.likes - a.likes;
 		 		})
-		 		//console.log('Max ' + objArr[0].likes)
 		       return objArr[0].likes;
 		  }
 
@@ -36,7 +35,6 @@ this.imageCloud = function (imgs) {
 		 		objArr.sort(function(a, b) {
 		 			return a.likes - b.likes;
 		 		})
-		 		//console.log('Min ' + objArr[0].likes)
 		       return objArr[0].likes;
 		  }
 
@@ -56,9 +54,7 @@ var setSizes = function(imgArr) {
    /* for (var i = 0; i < imgArr.length; i++) {
       total+=imgArr[i].likes;
     }*/
-   // console.log(total);
     imgArr[0].w = maxWidth;
-    //console.log(maxWidth);
     imgArr[0].h = maxHeight;
     imgArr[1].w = maxWidth * .60;
     imgArr[1].h = maxHeight * .60;
@@ -66,7 +62,6 @@ var setSizes = function(imgArr) {
     imgArr[2].h = maxHeight * .50;
 	maxWidth = maxWidth - ((maxWidth - minWidth)*.80);
 	maxHeight = maxHeight - ((maxHeight - minHeight)*.80);
-	//console.log(maxWidth);
     for (var i = 3; i < imgArr.length; i++) {
 	    var percentage = (imgArr[i].likes - minLikes) / (maxLikes - minLikes);
 	    var calcWidth = minWidth + (percentage * (maxWidth - minWidth));
@@ -74,8 +69,6 @@ var setSizes = function(imgArr) {
 
 	    imgArr[i].w = calcWidth;
 	    imgArr[i].h = calcHeight;
-	   // console.log(imgArr[i].likes);
-	  //  console.log(i + ':  w: ' + imgArr[i].w + ' h: ' + imgArr[i].h);
 	}
 }
 
@@ -109,7 +102,6 @@ var checkCollision = function (rect, bounds) {
 
 			var x = xCenter;
 			var y = yCenter;
-			//console.log(x, y);
 			var dy = $('#viewPort').height()/80/*(imgObj.h/8)*/;
 			var dx = dy*(ratio);
 			ratio = ratio/1.01
@@ -117,8 +109,6 @@ var checkCollision = function (rect, bounds) {
 			var horizontal = true;
 			var reverse;
 			for (var i = start; i < (start + 320); i++) {		
-				//console.log('before', x, y)
-				//console.log(i % 4);
 				 switch (i % 4)
 				  {
 		        case 0: horizontal = true;
@@ -157,7 +147,6 @@ var checkCollision = function (rect, bounds) {
 						/*ctx.stroke();*/
 						y = y-shiftY;
 					}
-					//console.log('after', x, y)
 					//ctx.stroke();
 					intervals--;
 
@@ -169,15 +158,12 @@ var checkCollision = function (rect, bounds) {
 					
 					var doesCollide = checkCollision(potentialImg, bounds);
 							if (!doesCollide) {
-						//console.log('Image fits at: (x, y) (' + potentialImg.x + ',' + potentialImg.y + ').');
 						filledImgs.push({ 'x': potentialImg.x,
 															'y': potentialImg.y,
 															'w': potentialImg.w,
 															'h': potentialImg.h});
-						//console.log(filledImgs);
 						imgObj.top = potentialImg.y;
 						imgObj.left = potentialImg.x;
-						//console.log(imgObj);
 						callback(imgObj);
 						return;
 					};
@@ -191,17 +177,15 @@ var filledImgs = [];
 var bounds;
 var viewPort = {};
 viewPort.w = $(window).width() - $('#sidebar').width();
-console.log(viewPort.w);
+viewPort.w = viewPort.w;
 viewPort.h = $(window).height() - $('#spacer').height();
-console.log(viewPort.h);
+viewPort.h = viewPort.h*0.9;
 var canvas = document.getElementById('cloud');
 var ctx = canvas.getContext('2d');
 ctx.canvas.height = viewPort.h;
 ctx.canvas.width = viewPort.w;
-var topOffset = $('#spacer').height();
-console.log('topOffset: ' + topOffset);
+var topOffset = $('#spacer').height() + 10;
 var leftOffset = $('#sidebar').width();
-console.log('leftOffset: '+ leftOffset);
 var xCenter =(viewPort.w/2) + leftOffset;
 var yCenter =(viewPort.h/2) + topOffset;
 var ratio = viewPort.w/viewPort.h;
@@ -211,9 +195,9 @@ var	bounds = {
 			'w': leftOffset + viewPort.w,
 			'h': topOffset + viewPort.h
 }
-var maxWidth = viewPort.w*(0.35);
+var maxWidth = viewPort.w*(0.33);
 var minWidth = 70;
-var maxHeight = viewPort.h*(0.40);
+var maxHeight = viewPort.h*(0.38);
 var minHeight = 50;
 var overlap = 6;
 var minLikes = getMinOfArray(tempImgs);
@@ -223,21 +207,18 @@ setSizes(tempImgs);
 
 tempImgs[0].top = topOffset + viewPort.h/2 - (tempImgs[0].h/2);
 tempImgs[0].left = leftOffset + viewPort.w/2 - (tempImgs[0].w/2);
-console.log(tempImgs[0].left)
 filledImgs.push({   'x': tempImgs[0].left,
 								'y': tempImgs[0].top,
 								'w': tempImgs[0].w,
 								'h': tempImgs[0].h})
-tempImgs[1].top = viewPort.h/2 - (tempImgs[1].h/2);
+tempImgs[1].top = topOffset + viewPort.h/2 - (tempImgs[1].h/2);
 tempImgs[1].left = tempImgs[0].left + tempImgs[0].w - 15;
-console.log(tempImgs[1].left)
 filledImgs.push({   'x': tempImgs[1].left,
 								'y': tempImgs[1].top,
 								'w': tempImgs[1].w,
 								'h': tempImgs[1].h})
-tempImgs[2].top = viewPort.h/2 - (tempImgs[2].h/2);
+tempImgs[2].top = topOffset + viewPort.h/2 - (tempImgs[2].h/2);
 tempImgs[2].left = tempImgs[0].left + 15 - tempImgs[2].w;
-console.log(tempImgs[2].left)
 filledImgs.push({   'x': tempImgs[2].left,
 								'y': tempImgs[2].top,
 								'w': tempImgs[2].w,

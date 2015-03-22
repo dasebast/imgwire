@@ -8,6 +8,8 @@ html, body, body.ng-scope {
  font-size: 12px;
 }
 
+/*Sidebar and search area styles*/
+
 #spacer {
 	height: 30px;
 	width: 100%;
@@ -20,8 +22,7 @@ html, body, body.ng-scope {
 }
 
 #logo:hover {
-/* 	-webkit-animation-name: hovershake;
-  animation-name: hovershake; */
+
 }
 
 .label {
@@ -49,7 +50,41 @@ html, body, body.ng-scope {
 	width: 180px;	
 }
 
+#sidebar {
+	padding: 5px;
+	box-sizing: border-box;
+	height: 100%;
+	width: 20%;
+	order: 1;
+	flex-grow: 1;
+}
 
+.loginPanel {
+	border: none;
+}
+
+.cursor-hand {
+	cursor: pointer;
+}
+
+.btn-orange {
+	background: #f4753a;
+	color: white;
+	margin-right: 10px;
+	transition: transform 100ms linear;
+}
+
+.btn-orange:hover {
+	transform: scale(1.05);
+	box-shadow: 2px 2px 2px 2px black;
+	color: white;
+}
+
+.btn-search {
+	height: 50%;
+}
+
+/*viewport styles*/
 canvas {
 	position: absolute;
 	top: 5%;
@@ -66,14 +101,6 @@ canvas {
 	justify-content: flex-start;
 }
 
-#sidebar {
-	padding: 5px;
-	box-sizing: border-box;
-	height: 100%;
-	width: 20%;
-	order: 1;
-	flex-grow: 1;
-}
 
 #ui, #ui.ng-scope {
 	top: 5%;
@@ -110,8 +137,8 @@ div > #viewPort {
 	cursor: alias;
 }
 
-.cursor-hand {
-	cursor: pointer;
+.high-contrast-text {
+	color: white;
 }
 
 

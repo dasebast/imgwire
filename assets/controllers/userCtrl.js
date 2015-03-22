@@ -35,9 +35,15 @@ module.exports = {
 				return res.status(500).end();
 			}
 			Passport.authenticate('local')(req, res, function() {
-			console.log(req.user + "create function");	
-			res.redirect('/#/dashboard')
-		})
+				console.log(req.user + "create function");	
+				User
+					.findOne({'_id': req.user._id})
+					.select('_id username email')
+					.exec()
+					.then(function(user) {
+						res.status(200).json(user);
+					})
+			})
 			
 		});
 	},
