@@ -8,7 +8,7 @@ function signupService($q, $http, $rootScope) {
 
 	var currentUser = {};
 
-	this.signupUser = function(obj) {
+	/*this.signupUser = function(obj) {
 		var dfd = $q.defer();
 		$http ({
 			method: 'Post',
@@ -28,9 +28,9 @@ function signupService($q, $http, $rootScope) {
 			dfd.reject(err);
 		})
 		return dfd.promise
-	},
+	},*/
 
-	this.getProfile = function() {
+	/*this.getProfile = function() {
 		var deferred = $q.defer();
 		console.log('getting profile')
 		$http({
@@ -43,8 +43,8 @@ function signupService($q, $http, $rootScope) {
 			deferred.resolve(response.data);
 		});
 		return deferred.promise;
-	},
-	this.logMeOut = function() {
+	},*/
+	/*this.logMeOut = function() {
 		var deferred = $q.defer();
 		console.log('logout almost resovlved')
 		$http({
@@ -55,7 +55,7 @@ function signupService($q, $http, $rootScope) {
 			deferred.resolve(response.data);
 		});
 		return deferred.promise;
-	},
+	}*/
 
 	this.getData = function() {
 		console.log('im in ther signup service')

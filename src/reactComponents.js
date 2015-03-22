@@ -108,8 +108,7 @@ var ImageCloud = React.createClass({
     return {
       imgs: this.props.imgs,
       /*{modalHidden: true,}*/
-      modalUrl: '',
-      clicked: false
+      modalUrl: ''
     }
   },
   componentDidMount: function () {
@@ -118,9 +117,8 @@ var ImageCloud = React.createClass({
     })
   },
   componentWillReceiveProps: function(nextProps) {
-    console.log(nextProps);
     this.setState({
-      imgs: nextProps
+      imgs: nextProps.imgs
     })
   },
   setHover: function (index) {
@@ -130,12 +128,18 @@ var ImageCloud = React.createClass({
       imgs: tempState
     })
   },
+  removeHover: function (index) {
+    var tempState = this.state.imgs;
+    tempState[index].hovered = false;
+    this.setState({
+      imgs: tempState
+    })
+  },
   formatUrl: function (url) {
     var fullUrl = url.split('/c_fill,h_200,w_300').join('');
     return fullUrl;
   },
-  openModal: function (url, id, top, left, hovered) {
-    console.log(hovered);
+  openModal: function (url) {
     var newUrl = this.formatUrl(url);
     this.setState({
       modalUrl: newUrl
@@ -145,13 +149,6 @@ var ImageCloud = React.createClass({
     console.log('clicky clicky')
     this.setState({
       modalUrl: ''
-    })
-  },
-  removeHover: function (index) {
-    var tempState = this.state.imgs;
-    tempState[index].hovered = false;
-    this.setState({
-      imgs: tempState
     })
   },
   render: function () {
@@ -175,7 +172,7 @@ var ImageCloud = React.createClass({
     }
       return (
 
-            <img key={item.id} imgs={this.state.imgs} className="animated fadeInRight box" style={styles.img} src={item.url} height={item.h} width={item.w} onMouseEnter={this.setHover.bind(null, index)} onMouseLeave={this.removeHover.bind(null, index)} onClick={this.openModal.bind(null, item.url, item.id, item.top, item.left, item.hovered)} close={this.closeModal} />
+            <img key={item.id} className="animated fadeInRight box" style={styles.img} src={item.url} height={item.h} width={item.w} onMouseEnter={this.setHover.bind(null, index)} onMouseLeave={this.removeHover.bind(null, index)} onClick={this.openModal.bind(null, item.url)} close={this.closeModal} />
       )
     });
 
@@ -196,7 +193,6 @@ var ImageCloud = React.createClass({
   <ImageCloud />,
   document.getElementById('imgCloud'));}
 */
-console.log('reactComponents I am in you');
 angular
   .module('imgwire')
   .value('ImageCloud', ImageCloud)

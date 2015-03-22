@@ -113,17 +113,24 @@ App.post('/api/pic', PicController.create);
 App.get('/api/pic', function(req, res) {
 	res.status(200).json(imgs);
 });
+
 App.post('/api/searchTagPictures', PicController.searchByTags);
 App.post('/api/searchSingleTag', PicController.searchSingleTag);
 
 App.get("/api/profile", isAuthed, UserController.profile);
 App.post('/api/auth', Passport.authenticate('local'), function(req, res) {
 	console.log('im in the server')
-	return res.status(200).redirect('/#/dashboard');
+	User
+		.findOne({'_id': req.user._id})
+		.select('_id username email')
+		.exec()
+		.then(function(user) {
+			res.status(200).json(user);
+		})
 });
 App.get('/api/logout', function(req, res){
   req.logout();
-  res.redirect('/');
+  res.end();
 });
 
 
