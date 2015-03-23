@@ -5,6 +5,7 @@ var Mongoose = require('mongoose');
 
 module.exports = {
 	create: function(req, res) {
+        console.log(req.body)
 		var newPics = new Pics(req.body);
 		newPics.save(function(err, response) {
 			if(err) {
