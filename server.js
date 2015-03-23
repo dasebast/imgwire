@@ -7,6 +7,7 @@ var Passport = require('passport')
 var Session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
 var imgs = require('./imgs/imgs.js');
+var Q  = require('q');
 
 var	Env = require('./env.js');
 var Port = 8888;
