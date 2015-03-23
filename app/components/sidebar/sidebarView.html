@@ -24,15 +24,8 @@
 
 <div ng-show="vm.loggedIn">
 	<p class="high-contrast-text">{{vm.message}}{{$root.currentUser.username}}</p>
+	<button class="btn btn-orange" ng-show="$root.currentUser.email">Dashboard</button>
 	<button class="btn btn-orange" ng-click="vm.logMeOut()">Logout</button>
-</div>
-
-<div>
-	<button class="btn" ng-hide="true">Dashboard</button>
-</div>
-
-<div>
-	<button class="btn" ng-hide="true">Sign Out</button>
 </div>
 
 <!--Search (top)-->

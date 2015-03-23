@@ -18,7 +18,7 @@ html, body, body.ng-scope {
 #logo {
 	width: 80%;
 	height: auto;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 #logo:hover {
@@ -141,4 +141,6 @@ div > #viewPort {
 	color: white;
 }
 
-
+.modal-custom:hover {
+	background: orange;
+}
