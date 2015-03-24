@@ -18,7 +18,7 @@ html, body, body.ng-scope {
 #logo {
 	width: 80%;
 	height: auto;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 #logo:hover {
@@ -34,6 +34,13 @@ html, body, body.ng-scope {
 	position: absolute;
 	top: 10px;
 	left: 20%;
+}
+
+.less-form-style {
+	margin: 0;
+	margin-right: 20px;
+	padding: 0;
+	border: none;
 }
 
 .inputBox {
@@ -133,12 +140,150 @@ div > #viewPort {
   -webkit-animation-fill-mode: none;
   animation-fill-mode: none;
 	transform: scale(1.32);
-	border: 20px solid black;
+	border: 8px solid black !important;
 	cursor: alias;
+	z-index: 300!important;
 }
 
 .high-contrast-text {
 	color: white;
 }
 
+#modal-container {
+	display: flex;
+	flex-direction: column;
+	justifyContent: center;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 500;
+}
 
+
+#modal-mask {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, .8);
+	zIndex: 501;
+}
+
+#modal-internal-container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+}
+
+#modal-expanded {
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+ 	position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid #111111;
+	border-radius: 5px;
+	margin: 0 auto;
+	width: auto;
+	max-height: 80%;
+	max-width: 80%;
+	color: white;
+	font-size: 20px;
+	background: #212121;
+	z-index: 502;
+}
+
+.animated-fast {
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+}
+
+#modal-image-container {
+	display: flex;
+	flex-direction: column;
+	max-height: 100%;
+	width: auto;
+	max-width: 80%;
+	margin-left: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#modal-image {
+	max-height: 100%;
+	width: 100%;
+	border-bottom: 5px;
+}
+
+.btn-close {
+	position: absolute;
+	top: 0%;
+	left: 0%;
+}
+
+.vote-container {
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	/* position: relative;
+	top: 50%;
+	transform: translateY(-50%); */
+	min-height: 200px;
+	max-height: 95%;
+}
+
+.vote-button {
+	height: 30px;
+	width: 30px;
+	border-radius: 30px;
+	text-align: center;
+}
+
+.vote-button:hover {
+	transform: scale(1.1);
+	box-shadow: 2px 2px 2px 2px black;
+	z-index: 501;
+}
+
+#upvote {
+	background: #4CAF50;
+	align-self: center;
+	margin-bottom: 9px;
+}
+
+#downvote {
+	background: #d32f2f;
+	align-self: center;
+}
+
+.vote-count {
+	font-family: sans-serif;
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	line-height: 20px;
+}
+
+.tag {
+	flex: none;
+	padding: 1px 8px 1px;
+	height: 3.5%;
+	background: #f4753a;
+	font-family: sans-serif;
+	font-size: 1rem;
+	color: white;
+	border-radius: 30px;
+	margin-right: 10px;
+	transition: transform 100ms linear;
+}
+
+.tag:hover {
+	transform: scale(1.05);
+	box-shadow: 2px 2px 2px 2px black;
+	color: white;
+	cursor: pointer;
+}
