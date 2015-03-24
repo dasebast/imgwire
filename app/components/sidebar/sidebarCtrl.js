@@ -74,6 +74,7 @@
 				vm.searchTagObjs = vm.tagArrayTitlesOnly;
 				console.log(vm.searchTagObjs);
 				vm.searchStr = '';
+				})
 
 				homeService.searchByTags(vm.tagArrayTitlesOnly).then(function(newImgs) {
 					console.log('get new imgs');
@@ -83,10 +84,11 @@
 					} else {
 						$rootScope.$emit('rootScope:emit', vm.noImgs);
 						vm.searchTagObjs = [];
+						vm.searchStr = '';
 					}
 				})
 				
-			})
+			
 
 		}
 	}
