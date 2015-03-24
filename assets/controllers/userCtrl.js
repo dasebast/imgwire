@@ -65,7 +65,7 @@ module.exports = {
 
 	getUserPics: function(req, res) {
 		Pics.find({ "owner": { "$all": [ req.user._id]}})
-			.select('_id imageUrl upvotes tags owner')
+			.select('_id image upvotes tags owner')
             .populate('tags owner')
             .sort('-upvotes')
             .limit(50)
