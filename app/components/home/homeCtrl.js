@@ -6,37 +6,64 @@ angular
   .module('imgwire')
   .controller('HomeCtrl', HomeCtrl)
 
-function HomeCtrl (homeService, getImgs, getTags, imageCloudService, $scope, $rootScope) {
+function HomeCtrl (homeService, getImgs, getTags, imageCloudService, $scope, $rootScope, $timeout) {
   var vm = this;
  
   vm.test = "homeCtrl win";
-  vm.tags = getTags;
   vm.imgs = getImgs;
   vm.modalShowing = false;
-
-  vm.clickHandler = function(id) {
-    console.log(id);
-  };
+  vm.url = '';
+  vm.upvotes = 0;
 
   $rootScope.$on('rootScope:emit', function(event, data) {
     imageCloudService.imageCloud(data)
       .then(function(res) {
         vm.imgs = res;
-        $scope.imgs = {imgs: vm.imgs};
       })
   });
+
+
+
+  vm.openModal = function(url, likes, tags, id) {
+      console.log(url);
+      vm.id = id;
+      vm.url = url;
+      vm.upvotes = likes;
+      $timeout(function(){
+        vm.modalShowing = true;
+        vm.tags = tags;
+      }, 50)
+      console.log(vm.modalShowing);
+  };
+
+  vm.closeModal = function() {
+    vm.url = '';
+    vm.modalShowing = false;
+    vm.tags = [];
+    console.log(vm.modalShowing);
+  }
+
+  vm.nothing = function() {
+    return null;
+  }
+
+  vm.upvote = function() {
+    homeService.upvote(vm.id).then(function(res){
+      vm.upvotes = res;
+    })
+  }
+
+  vm.downvote = function() {
+    homeService.downvote(vm.id).then(function(res) {
+      vm.upvotes = res;
+    })
+  }
 
 
   imageCloudService.imageCloud(vm.imgs)
     .then(function(res) {
       vm.imgs = res;
-      $scope.clickHandler = {clickHandler: vm.clickHandler};
-      $scope.imgs = {imgs: vm.imgs};
     });
-
-  vm.tagSearch = function(id) {
-    console.log(id);
-  };
 
 }
 

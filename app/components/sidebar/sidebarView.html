@@ -30,10 +30,14 @@
 
 <!--Search (top)-->
 <div id="searchBarContainer" class="animated fadeInDown">
-		<input id="searchBar" class="inputBox" type="search" placeholder="explore the fotoverse..." ng-model="vm.searchTags" />
-		<button class="btn btn-small btn-orange btn-search" ng-click="vm.searchByTags(vm.searchTags)">Search</button>
-		<div ng-repeat="tag in vm.tags">
-			<button class="btn btn-small btn-orange" ng-click="">{{tag.title}}</button>
+		<form class="inline-form col-md-2 less-form-style" ng-submit="vm.searchByTags(vm.searchTags)">
+			<input id="searchBar" class="inputBox" type="search" placeholder="explore the fotoverse..." ng-model="vm.searchStr" />
+		</form>
+		<div ng-repeat="tag in vm.searchTags">
+			<div class="inline tag" ng-click="vm.removeTag(tag)">
+				{{tag}}
+				<i class="fa fa-times"></i>
+			</div>
 		</div>
 </div>
 

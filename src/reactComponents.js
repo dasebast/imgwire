@@ -3,7 +3,7 @@ var joinClasses = require('react/lib/joinClasses');
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 
-//modal
+/*{//modal
 var Modal = React.createClass({
   propTypes: {
     close: React.PropTypes.func,
@@ -96,28 +96,23 @@ var Modal = React.createClass({
     )
   }
 })
-//end modal
+//end modal}*/
 
 
 //create image cloud
 var ImageCloud = React.createClass({
   propTypes: {
     imgs: React.PropTypes.array,
-    clickHandler: React.PropTypes.func,
-    modalShowing: React.PropTypes.bool
+    clickHandler: React.PropTypes.func
   },
   getInitialState: function () {
     return {
       imgs: this.props.imgs,
-      /*{modalHidden: true,}*/
-      modalUrl: '',
       clickHandler: function(){},
-      modalShowing: false
     }
   },
   componentDidMount: function () {
     var tempImgs = this.props.imgs;
-    tempImgs.modalShowing = false;
     var tempClickHandler = this.props.clickHandler;
     this.setState({
       imgs: tempImgs,
@@ -126,7 +121,6 @@ var ImageCloud = React.createClass({
   },
   componentWillReceiveProps: function(nextProps) {
     var tempImgs = nextProps.imgs
-    /*{console.log(nextProps);}*/
     this.setState({
       imgs: tempImgs
     })
@@ -149,64 +143,37 @@ var ImageCloud = React.createClass({
     var fullUrl = url.split('/c_fill,h_200,w_300').join('');
     return fullUrl;
   },
-/*{  openModal: function (url) {
-    this.setState({
-      modalShowing: true
-    })
-  },
-  closeModal: function (url) {
-    console.log('close modal');
-    console.log(this.state);
-    this.setState({
-      modalShowing: false
-    })
-    console.log(this.state)
-  },}*/
-  _handleClick: function(id){
-    this.props.clickHandler(id);
+  _handleClick: function(url, likes, tags, id){
+    this.props.clickHandler(url, likes, tags, id);
+    this.render();
   },
   render: function () {
     
-    /*{var modalShow = this.state.modalUrl ? <Modal closeModal={this.closeModal} url={this.state.modalUrl} onClick={this.closeModal}/> : null;}*/
-/*{    var modalStyles = {
-      modal: {
-        height: '50px',
-        width: '50px',
-        position: 'fixed',
-        top: '20px',
-        left: '20px',
-        background: '#000'
-      }
-    }
-    console.log(this.state.modalShowing);
-    var modalShow = this.state.modalShowing ? <div style={modalStyles.modal} onClick={this._handleClick}/> : null;}*/
-    var modalShow = null;
     var mapImageCloud = !this.state.imgs ? null : this.state.imgs.map( (item, index) => {
       var styles = {
       img: {
         background: '#212121',
         borderRadius: '5px',
-        border: this.state.imgs[index].hovered ? '8px solid black' : '1px solid black',
+        border: '1px solid black',
         position: 'absolute',
         left: item.left,
         top: item.top,
         height: item.h,
         width: item.w,
         boxShadow: '0px 7px 0px -3px rgba(30,30,30,.5)',
-        zIndex: this.state.imgs[index].hovered ? 1000 : (this.state.imgs.length - index)
+        zIndex: this.state.imgs.length - index
       }
     }
     
       return (
 
-            <img key={item.id} className="animated fadeInRight box" style={styles.img} src={item.url} height={item.h} width={item.w} onMouseEnter={this.setHover.bind(null, index)} onMouseLeave={this.removeHover.bind(null, index)} onClick={this._handleClick.bind(null, item.id)} />
+            <img key={item.id} className="animated fadeInRight box" style={styles.img} src={item.url} height={item.h} width={item.w} onClick={this._handleClick.bind(null, item.url, item.likes, item.tags, item.id)} />
       )
     });
 
 
   return (
       <div>
-        {modalShow}
         {mapImageCloud}
       </div>
     )
@@ -223,4 +190,3 @@ var ImageCloud = React.createClass({
 angular
   .module('imgwire')
   .value('ImageCloud', ImageCloud)
-  .value('Modal', Modal);
