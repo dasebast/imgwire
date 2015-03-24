@@ -18,8 +18,6 @@ angular
 
 		function photoAlbumServices ($q, $http, $rootScope) {
 			this.uploadUrl = function(obj, title, tags) {
-				console.log(tags)
-				console.log($rootScope.photos[0].url)
 				var dfd = $q.defer();
 				$http({
 					method: 'Post',
@@ -28,7 +26,7 @@ angular
 						title: title,
 						image: obj,
 						owner: $rootScope.currentUser._id,
-						tags: [tags]
+						tags: tags
 					}
 				})
 				.then(function(response) {
