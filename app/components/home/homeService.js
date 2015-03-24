@@ -16,7 +16,7 @@
 						tempArr.push({
 										//TODO get the right key names
 										'id': res.data[i]._id,
-										'url': res.data[i].imageUrl,
+										'url': res.data[i].image,
 										'likes': res.data[i].upvotes
 						})
 					};
@@ -52,7 +52,7 @@
 						tempArr.push({
 										//TODO get the right key names
 										'id': res.data[i]._id,
-										'url': res.data[i].imageUrl,
+										'url': res.data[i].image,
 										'likes': res.data[i].upvotes,
 										'tags': res.data[i].tags
 						})
