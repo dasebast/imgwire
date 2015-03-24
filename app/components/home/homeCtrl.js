@@ -14,6 +14,7 @@ function HomeCtrl (homeService, getImgs, getTags, imageCloudService, $scope, $ro
   vm.modalShowing = false;
   vm.url = '';
   vm.upvotes = 0;
+  vm.noResultsMessage = "Your search returned no results. Please try a less specific search!"
 
   $rootScope.$on('rootScope:emit', function(event, data) {
     imageCloudService.imageCloud(data)

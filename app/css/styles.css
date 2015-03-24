@@ -287,3 +287,12 @@ div > #viewPort {
 	color: white;
 	cursor: pointer;
 }
+
+.inline {
+	display: inline-block;
+}
+
+.errMessage {
+	text-align: center;
+	font-size: 1.5rem;
+}

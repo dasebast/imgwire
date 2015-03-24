@@ -26,6 +26,9 @@
 <div id="viewPort">
 			<canvas height="1px" width="1px" border="none" id="cloud"/>
 				<react-component ng-hide="!$root.imgs[0].id" name="ImageCloud" props="{imgs: vm.imgs, clickHandler: vm.openModal}" watch-depth="value"></react-component>
+				<p class="errMessage high-contrast-text" ng-if="vm.imgs[0].id === '404'">
+					{{vm.noResultsMessage}}
+				</p>
 </div>
 
 <!-- 		<div class="col-md-3" style=";border-left: 1px solid #ededed;">

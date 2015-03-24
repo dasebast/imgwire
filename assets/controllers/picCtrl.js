@@ -20,25 +20,23 @@ module.exports = {
     var tempArr = req.body.tags
     var searchArr = []
     console.log(tempArr)
-    for(var i =0; i < tempArr.length; i++) {
-        Tags.find({title: tempArr[i]})
+
+        Tags.find({"title": { "$in": tempArr}}) //all the tags from the input array
             .select("_id")
             .exec()
-            .then(function(id) {
-                id.forEach(function(item) {
-                    searchArr.push(item._id)
-                })
-            Pics.find({ "tags": { "$all": searchArr}})
-            .select('_id imageUrl upvotes tags')
-            .populate('tags')
-            .sort('-upvotes')
-            .limit(50)
-            .exec()
-            .then(function(results) {
-                res.status(200).json(results)
-                })
+            .then(function(allTheTags) {
+            
+                Pics.find({ "tags": { "$all": allTheTags}})
+                .select('_id imageUrl upvotes tags')
+                .populate('tags')
+                .sort('-upvotes')
+                .limit(50)
+                .exec()
+                .then(function(results) {
+                    res.status(200).json(results)
+                    })
             })
-        }
+
 
     },
     searchSingleTag: function(req, res) {
