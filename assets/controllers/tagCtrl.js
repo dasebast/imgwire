@@ -8,21 +8,14 @@ module.exports = {
 		var tempArr = req.body.title;
     var searchArr = []
     tempArr.forEach(function(item){
-			var dfd = Q.defer();
-			var newTags = new Tags({title: item});
-			searchArr.push(newTags);
-			console.log("searcharr " + searchArr);
-			console.log("new tags hi" + newTags);
-			}).then(function(result){
-					console.log(result);
-					newTags.save(function(err, response) {
-					console.log("im saving" + response);
-					if(err) {
-						return res.status(500).end();
-					}
-					return res.json(response);	
-			});
-    });
+    	console.log(item);
+    	var newTags = new Tags({title: item});
+    	console.log(newTags);
+    	newTags.save()
+    	searchArr.push(newTags);
+    	console.log("im search arr " + searchArr);
+		});
+		return res.json(searchArr);
 	},
 
 	get: function(req, res) {

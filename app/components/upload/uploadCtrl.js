@@ -39,9 +39,12 @@ photoAlbumControllers.controller('uploadCtrl', ['$scope', '$rootScope', '$locati
           photoAlbumServices.uploadTags(tagObjects).then(function(res){
             console.log(res);
             $rootScope.tagStore = [];
-            $rootScope.tagStore.push(res);
-            console.log("yo root scope " + $rootScope.tagStore.data);
-            photoAlbumServices.uploadUrl($rootScope.photos[0].url, $scope.title, res._id).then(function(response) {
+            res.forEach(function(item){
+              console.log(item._id);
+              $rootScope.tagStore.push(item._id);
+            })
+            console.log($rootScope.tagStore);
+            photoAlbumServices.uploadUrl($rootScope.photos[0].url, $scope.title, $rootScope.tagStore).then(function(response) {
               $scope.title = '';
               $scope.tags = '';
               console.log(response + 'im the return productrtttt');
