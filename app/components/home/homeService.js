@@ -93,6 +93,23 @@
 		return dfd.promise
 	}
 
+	this.tagQuery = function(tagArr) {
+		var dfd = $q.defer();
+			$http({
+				method: 'POST',
+				url: apiUrl + '/tagQuery',
+				data: {
+					title: tagArr
+				}
+			})
+			.then(function(response) {
+				console.log(response.data);
+				dfd.resolve(response.data);
+			})
+
+		return dfd.promise;
+	}
+
 	}
 
 })();
