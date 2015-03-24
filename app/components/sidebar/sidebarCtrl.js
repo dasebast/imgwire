@@ -8,8 +8,8 @@
 			var vm = this;
 			vm.register = false;
 			vm.loggedIn = false;
-			vm.tags = [];
-			vm.searchTags = '';
+			vm.searchTags = [];
+			vm.searchStr = '';
 			vm.userLoginInfo = {};
 			vm.message = "Hello, ";
 
@@ -51,21 +51,32 @@
 	}
 
 	vm.searchByTags = function(searchTags) {
-		if (searchTags) {
-			var tagArray = searchTags.split(' ');
+		if (vm.searchStr) {
+			console.log(vm.searchStr);
+			var tagArray = vm.searchStr.replace(/ +/g, ' ').split(' ');
 			//TODO get tags from DB and push to vm.tags
-		
-			homeService.getTags(searchTags).then(function(res) {
-				console.log(res);
-				tagsFromDB = res;
+			homeService.getTags(vm.searchTags).then(function(res) {
+				var tagsFromDB = res;
+				console.log(tagsFromDB);
+				vm.searchTags = tagArray;
+				console.log(vm.searchTags);
+				vm.searchStr = '';
+				
 				homeService.searchByTags(tagArray).then(function(newImgs) {
-					console.log(newImgs);
 					$rootScope.$emit('rootScope:emit', newImgs);
 				})
 				
 			})
 
 		}
+	}
+
+	//TODO change tag to _id and search 'default' pics
+	vm.removeTag = function(tag) {
+		vm.searchTags.splice(vm.searchTags.indexOf(tag), 1);
+		homeService.getPics().then(function(newImgs) {
+			$rootScope.$emit('rootScope:emit', newImgs);
+		})
 	}
 
 		}

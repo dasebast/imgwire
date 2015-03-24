@@ -1,7 +1,31 @@
+<div id="modal-container" ng-hide="!vm.modalShowing">
+	<div id="modal-mask" ng-click="vm.closeModal()">
+	</div>
+	<div id="modal-internal-container">
+		<div id="modal-expanded" class="animated-fast zoomInUp">
+			<button class="btn btn-orange btn-close" ng-click="vm.closeModal()"><span class="glyphicon glyphicon-remove"></span></button>
+			<div class="vote-container">
+				<div id="upvote" class="vote-button" ng-click="vm.upvote()">
+					<span class="fa fa-arrow-up"></span>
+				</div>
+				<p class="vote-count">{{vm.upvotes}}</p>
+				<div id="downvote" class="vote-button" ng-click="vm.downvote()">
+					<span class="fa fa-arrow-down"></span>
+				</div>
+			</div>
+			<div id="modal-image-container">
+				<img class="img img-responsive" id="modal-image" src="{{vm.url}}" />
+				<div class="tag-container">
+					<div class="inline tag" ng-repeat="tag in vm.tags">{{tag.title}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <div id="spacer" height="30px"></div>
 <div id="viewPort">
 			<canvas height="1px" width="1px" border="none" id="cloud"/>
-				<react-component ng-if="$root.imgs[0].id" name="ImageCloud" props="imgs" watch-depth="value"></react-component>
+				<react-component ng-hide="!$root.imgs[0].id" name="ImageCloud" props="{imgs: vm.imgs, clickHandler: vm.openModal}" watch-depth="value"></react-component>
 </div>
 
 <!-- 		<div class="col-md-3" style=";border-left: 1px solid #ededed;">

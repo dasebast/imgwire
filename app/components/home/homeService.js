@@ -63,6 +63,35 @@
 		return dfd.promise;
 	}
 
+	this.upvote = function(id) {
+		var dfd = $q.defer();
+		$http({
+			method: 'POST',
+			url: apiUrl + '/upvote',
+			data: {
+				_id: id
+			}
+		})
+			.success(function(res) {
+				dfd.resolve(res.data);
+			})
+		return dfd.promise
+	}
+
+	this.downvote = function(id) {
+		var dfd = $q.defer();
+		$http({
+			method: 'POST',
+			url: apiUrl + '/downvote',
+			data: {
+				_id: id
+			}
+		})
+			.success(function(res) {
+				dfd.resolve(res.data);
+			})
+		return dfd.promise
+	}
 
 	}
 
