@@ -105,6 +105,13 @@ var isAuthed = function(req, res, next) {
 App.post('/api/tags', TagsController.create);
 App.get('/api/tags', TagsController.get);
 
+App.post('/api/tagQuery', function(req, res){
+	 TagsController.tagQuery(req.body.title).then(function(result){
+	 		res.status(200).json(result);
+	 })
+});
+
+
 App.post('/api/user', UserController.create);
 App.get('/api/user', UserController.get);
 App.get('/api/userPics', isAuthed, UserController.getUserPics)
