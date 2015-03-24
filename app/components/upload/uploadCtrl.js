@@ -17,7 +17,7 @@ photoAlbumControllers.controller('uploadCtrl', ['$scope', '$rootScope', '$locati
           file: file
         }).progress(function (e) {
           file.progress = Math.round((e.loaded * 100.0) / e.total);
-          file.status = "Uploading... " + File.progress + "%";
+          file.status = "Uploading... " + file.progress + "%";
           if(!$scope.$$phase) {
             $scope.$apply();
           }
@@ -30,8 +30,25 @@ photoAlbumControllers.controller('uploadCtrl', ['$scope', '$rootScope', '$locati
           if(!$scope.$$phase) {
             $scope.$apply();
           } 
-          photoAlbumServices.uploadUrl($rootScope.photos[0].url).then(function(res) {
-            console.log(res + 'im the return productrtttt')
+          var tagArray = $scope.tags.replace(/ +/g, ' ').split(' ');
+          var tagObjects = {
+            title: tagArray
+          };
+          console.log(tagArray);
+          console.log(tagObjects);
+          photoAlbumServices.uploadTags(tagObjects).then(function(res){
+            console.log(res);
+            $rootScope.tagStore = [];
+            res.forEach(function(item){
+              console.log(item._id);
+              $rootScope.tagStore.push(item._id);
+            })
+            console.log($rootScope.tagStore);
+            photoAlbumServices.uploadUrl($rootScope.photos[0].url, $scope.title, $rootScope.tagStore).then(function(response) {
+              $scope.title = '';
+              $scope.tags = '';
+              console.log(response + 'im the return productrtttt');
+            });            
           })
         }).catch(function(err){
             console.log(err, 'this is the error in the file upload');

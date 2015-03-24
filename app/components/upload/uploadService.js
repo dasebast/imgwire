@@ -17,16 +17,16 @@ angular
 	.service('photoAlbumServices', photoAlbumServices);
 
 		function photoAlbumServices ($q, $http, $rootScope) {
-			this.uploadUrl = function(obj) {
-				console.log(obj)
-				console.log($rootScope.photos[0].url)
+			this.uploadUrl = function(obj, title, tags) {
 				var dfd = $q.defer();
 				$http({
 					method: 'Post',
 					url: '/api/pic',
 					data: {
-						title: 'this is hard coded',
-						image: obj
+						title: title,
+						image: obj,
+						owner: $rootScope.currentUser._id,
+						tags: tags
 					}
 				})
 				.then(function(response) {
@@ -38,6 +38,25 @@ angular
 					dfd.reject(err);
 				});
 				return dfd.promise
+			},
+
+			this.uploadTags = function(tagObj){
+				var dfd = $q.defer();
+				console.log(tagObj);
+				$http({
+					method: 'POST',
+					url: '/api/tags',
+					data: tagObj
+				})
+				.then(function(response){
+					console.log(response.data);
+					dfd.resolve(response.data);
+				})
+				.catch(function(err){
+					dfd.reject(err);
+				});
+				return dfd.promise;
 			}
+
 		}
 })();

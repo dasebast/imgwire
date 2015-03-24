@@ -1,16 +1,21 @@
 var Tags = require('./../models/tagModel');
 var Mongoose = require('mongoose');
+var Q = require('q');
+
 
 module.exports = {
 	create: function(req, res) {
-		var newTags = new Tags(req.body);
-		newTags.save(function(err, response) {
-			if(err) {
-				return res.status(500).end();
-			}
-			return res.json(response);
-		
+		var tempArr = req.body.title;
+    var searchArr = []
+    tempArr.forEach(function(item){
+    	console.log(item);
+    	var newTags = new Tags({title: item});
+    	console.log(newTags);
+    	newTags.save()
+    	searchArr.push(newTags);
+    	console.log("im search arr " + searchArr);
 		});
+		return res.json(searchArr);
 	},
 
 	get: function(req, res) {
