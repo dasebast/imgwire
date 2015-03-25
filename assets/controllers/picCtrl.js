@@ -62,8 +62,7 @@ module.exports = {
         .then(function(response){
             console.log(req.body);
             Pics.find({ "_id": req.body._id})
-            .select("_id upvotes image tags")
-            .populate("tags")
+            .select("upvotes")
             .exec()
             .then(function(result){
                 res.status(200).json(result);
@@ -80,8 +79,7 @@ module.exports = {
         .then(function(response){
             console.log(req.body);
             Pics.find({ "_id": req.body._id})
-            .select("_id upvotes image tags")
-            .populate("tags")
+            .select("upvotes")
             .exec()
             .then(function(result){
                 res.status(200).json(result);
