@@ -61,13 +61,14 @@ module.exports = {
         .exec()
         .then(function(response){
             console.log(req.body);
-            Pics.find({ "_id": req.body._id})
-            .select("upvotes")
-            .exec()
-            .then(function(result){
-                res.status(200).json(result);
+            Pics
+                .findOne({ "_id": req.body._id})
+                .select("upvotes")
+                .exec()
+                .then(function(result){
+                    res.status(200).json(result);
+                })
             })
-        })
     },
 
     downvotePic: function(req, res){

@@ -50,6 +50,7 @@ function HomeCtrl (homeService, getImgs, getTags, imageCloudService, $scope, $ro
 
   vm.upvote = function() {
     homeService.upvote(vm.id).then(function(res){
+      console.log(res);
       vm.upvotes = res;
     })
   }
