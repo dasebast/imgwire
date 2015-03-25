@@ -51,7 +51,45 @@ module.exports = {
                 console.log(results)
                 res.status(200).json(results)
             })
+    },
+
+    upvotePic: function(req, res){
+        Pics.update(
+            { _id: req.body._id},
+            { $inc: { upvotes: 1}}
+        )
+        .exec()
+        .then(function(response){
+            console.log(req.body);
+            Pics.find({ "_id": req.body._id})
+            .select("_id upvotes image tags")
+            .populate("tags")
+            .exec()
+            .then(function(result){
+                res.status(200).json(result);
+            })
+        })
+    },
+
+    downvotePic: function(req, res){
+        Pics.update(
+            { _id: req.body._id},
+            { $inc: { upvotes: -1}}
+        )
+        .exec()
+        .then(function(response){
+            console.log(req.body);
+            Pics.find({ "_id": req.body._id})
+            .select("_id upvotes image tags")
+            .populate("tags")
+            .exec()
+            .then(function(result){
+                res.status(200).json(result);
+            })
+        })
+
     }
+
 
 }
 //     get2: function(req, res) {
