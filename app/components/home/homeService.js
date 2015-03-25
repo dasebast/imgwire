@@ -73,7 +73,9 @@
 			}
 		})
 			.success(function(res) {
-				dfd.resolve(res.data);
+				console.log('upvote');
+				console.log(res)
+				dfd.resolve(res.upvotes);
 			})
 		return dfd.promise
 	}
@@ -88,7 +90,7 @@
 			}
 		})
 			.success(function(res) {
-				dfd.resolve(res.data);
+				dfd.resolve(res[0].upvotes);
 			})
 		return dfd.promise
 	}

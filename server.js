@@ -111,8 +111,8 @@ App.post('/api/tagQuery', function(req, res){
 	 })
 });
 
-App.post('/api/upvotePic', PicController.upvotePic);
-App.post('/api/downvotePic', PicController.downvotePic);
+App.post('/api/upvote', PicController.upvotePic);
+App.post('/api/downvote', PicController.downvotePic);
 
 
 App.post('/api/user', UserController.create);
