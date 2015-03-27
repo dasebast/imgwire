@@ -146,7 +146,7 @@ App.get('/api/logout', function(req, res){
 
 
 // ============================ CONNECTIONS ===========================
-Mongoose.connect('mongodb://104.236.89.95:27017/imgwire');
+Mongoose.connect('mongodb://localhost:27017/imgwire');
 
 App.listen(process.env.EXPRESS_PORT || 8888);
 
