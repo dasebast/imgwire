@@ -2,20 +2,41 @@ var Tags = require('./../models/tagModel');
 var Mongoose = require('mongoose');
 var Q = require('q');
 
-
 module.exports = {
 	create: function(req, res) {
-		var tempArr = req.body.title;
-    var searchArr = []
-    tempArr.forEach(function(item){
-    	console.log(item);
-    	var newTags = new Tags({title: item});
-    	console.log(newTags);
-    	newTags.save()
-    	searchArr.push(newTags);
-    	console.log("im search arr " + searchArr);
-		});
-		return res.json(searchArr);
+		console.log(req.body.title)
+	var tempArr = req.body.title
+    var searchArr = [];
+   var dfd = Q.defer();
+    tempArr.forEach(function(item) {
+    	Tags.findOne({"title": item})
+    		.exec()
+    		.then(function(result) {
+    			console.log('the results')
+    			console.log(result)
+    			if(result === null) {
+    				console.log('im in the newtags stuff')
+    				var newTags = new Tags({title: item});
+    				newTags.save()
+    				searchArr.push(newTags);
+    				console.log(searchArr)
+    				
+    			}
+    			if(result) {
+    				console.log('im in the else if')
+    				//console.log(result)
+    				searchArr.push(result)
+    				console.log(searchArr)
+    				//dfd.resolve(searchArr)
+    			}
+    			
+    		})
+    		//TODO take this timeout OUT
+    		setTimeout(function() {dfd.resolve(searchArr)}, 1000)
+
+		})
+    	return dfd.promise
+		//return res.status(200).json(searchArr)
 	},
 
 	get: function(req, res) {

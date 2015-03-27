@@ -102,7 +102,11 @@ var isAuthed = function(req, res, next) {
 
 
 // ============================ ENDPOINTS =============================
-App.post('/api/tags', TagsController.create);
+App.post('/api/tags', function(req, res) {
+	TagsController.create(req).then(function(results) {
+		res.status(200).json(results)
+	})
+});
 App.get('/api/tags', TagsController.get);
 
 App.post('/api/tagQuery', function(req, res){
