@@ -9,8 +9,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var imgs = require('./imgs/imgs.js');
 var Q  = require('q');
 
-var	Env = require('./env.js');
-var Port = 8888;
+// var	Env = require('./env.js');
 
 
 var App = Express();
@@ -22,9 +21,9 @@ var Pics = require('./assets/models/picModel');
 
 // ============================ CONFIG ===========================
 Cloudinary.config({ 
-  cloud_name: Env.cloudinaryName, 
-  api_key: Env.cloudinaryApiKey,
-  api_secret: Env.cloudinaryApiSecret 
+  cloud_name: process.env.cloudinaryName, 
+  api_key: process.env.cloudinaryApiKey,
+  api_secret: process.env.cloudinaryApiSecret 
 });
 
 
@@ -139,44 +138,15 @@ App.post('/api/auth', Passport.authenticate('local'), function(req, res) {
 			res.status(200).json(user);
 		})
 });
+
 App.get('/api/logout', function(req, res){
   req.logout();
   res.end();
 });
 
 
-
-App.post('/api/pictest', function(req, res) {
-
-	// Cloudinary.uploader.upload("./app/img/dog.jpg", function(result) { 
- // 	 console.log(result) 
- // 	 res.status(200).json(result);
-	// });
-
-	Cloudinary.uploader.upload("./app/img/dog.jpg", function(result) { 
-		console.log(result)
- 	 res.status(200).json(result);
-	},
- 	 {public_id: "test_eager6",
- 		
- 			effect: "sepia"
- 		}
-
-	);
- 	 
-
-
-
-});
-
-
-
-
-
-
 // ============================ CONNECTIONS ===========================
 Mongoose.connect('mongodb://localhost:27017/imgwire');
 
-App.listen(Port, function() {
-	console.log('listening to ' + Port)
-});
+App.listen(process.env.EXPRESS_PORT || 8888);
+
