@@ -1,0 +1,59 @@
+{
+  "name": "ng-file-upload",
+  "version": "3.2.5",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-text-replace": "~0.3.12",
+    "grunt-git": "~0.2.14"
+  },
+  "dependencies": {
+    "grunt-contrib-concat": "~0.5.0"
+  },
+  "description": "angular-file-upload ===================",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danialfarid/angular-file-upload.git"
+  },
+  "keywords": [
+    "angularjs",
+    "angular-file-upload",
+    "file-upload",
+    "javascript"
+  ],
+  "author": {
+    "name": "danial.farid@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danialfarid/angular-file-upload/issues"
+  },
+  "homepage": "https://github.com/danialfarid/angular-file-upload",
+  "gitHead": "ace9084d9a5175ce083a131c3b958ea504bb669f",
+  "_id": "ng-file-upload@3.2.5",
+  "_shasum": "90c8021f09507bddf4f45a99b5cde9ca9a8262f5",
+  "_from": "ng-file-upload@",
+  "_npmVersion": "2.5.1",
+  "_nodeVersion": "0.12.0",
+  "_npmUser": {
+    "name": "danial.farid",
+    "email": "danial.farid@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "danial.farid",
+      "email": "danial.farid@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "90c8021f09507bddf4f45a99b5cde9ca9a8262f5",
+    "tarball": "http://registry.npmjs.org/ng-file-upload/-/ng-file-upload-3.2.5.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/ng-file-upload/-/ng-file-upload-3.2.5.tgz"
+}
