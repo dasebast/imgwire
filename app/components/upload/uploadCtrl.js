@@ -23,35 +23,46 @@ photoAlbumControllers.controller('uploadCtrl', ['$scope', '$rootScope', '$locati
           }
         }).success(function (data, status, headers, config) {
           $rootScope.photos = $rootScope.photos || [];
+          console.log('rootScope.photos')
+          console.log($rootScope.photos);
           data.context = {custom: {photo: $scope.title}};
           file.result = data;
           $rootScope.photos.push(data);
-          console.log($rootScope.photos[0].url)
           if(!$scope.$$phase) {
             $scope.$apply();
           } 
           var tagArray = $scope.tags.replace(/ +/g, ' ').split(' ');
-          var tagObjects = {
+          $scope.tagObjects = {
             title: tagArray
           };
           console.log(tagArray);
-          console.log(tagObjects);
-          photoAlbumServices.uploadTags(tagObjects).then(function(res){
+          console.log($scope.tagObjects);
+          
+        }).catch(function(err){
+            console.log(err, 'this is the error in the file upload');
+        })
+        .then(function() {
+          photoAlbumServices.uploadTags($scope.tagObjects).then(function(res){
             console.log(res);
-            $rootScope.tagStore = [];
+            $rootScope.tagStore = $rootScope.tagStore || [];
             res.forEach(function(item){
               console.log(item._id);
               $rootScope.tagStore.push(item._id);
             })
-            console.log($rootScope.tagStore);
-            photoAlbumServices.uploadUrl($rootScope.photos[0].url, $scope.title, $rootScope.tagStore).then(function(response) {
-              $scope.title = '';
-              $scope.tags = '';
-              console.log(response + 'im the return productrtttt');
-            });            
+            $rootScope.photos.forEach(function(pics) {
+              console.log('tagstore');
+              console.log($rootScope.tagStore);
+              console.log('scope title');
+              console.log($scope.title);
+              photoAlbumServices.uploadUrl(pics.url, $scope.title, $rootScope.tagStore).then(function(response) {
+                console.log(response + 'im the return productrtttt');
+              })
+            })
+          /*  $scope.title = '';
+            $scope.tags = '';*/
+            ;            
           })
-        }).catch(function(err){
-            console.log(err, 'this is the error in the file upload');
+          
         });
       });
     });

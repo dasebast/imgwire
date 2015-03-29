@@ -72,7 +72,7 @@ var setSizes = function(imgArr) {
   	
   	if (imgArr.length > 3) {
 	    for (var i = 3; i < imgArr.length; i++) {
-		    var percentage = (imgArr[i].likes - minLikes) / (maxLikes - minLikes);
+		    var percentage = (imgArr[i].likes - minLikes) / (maxLikes + 1 - minLikes);
 		    var calcWidth = minWidth + (percentage * (maxWidth - minWidth));
 		    var calcHeight = minHeight + (percentage * (maxHeight - minHeight));
 
