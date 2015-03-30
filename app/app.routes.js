@@ -2,7 +2,8 @@
 
 angular
 	.module('imgwire')
-	.config(config);
+	.config(config)
+	.run(run);
 
 function config ($stateProvider, $urlRouterProvider) {
 		
@@ -23,7 +24,7 @@ function config ($stateProvider, $urlRouterProvider) {
 				}
 			}
 		})
-		.state('login', {
+/*		.state('login', {
 			url: '/login',
 			templateUrl: '/components/login/loginView.html',
 			controller: 'loginCtrl',
@@ -50,7 +51,7 @@ function config ($stateProvider, $urlRouterProvider) {
 						 	return dashService.getPictures()
 						}
 					}	
-		})
+		})*/
 		.state('upload', {
 			url: '/upload',
 			templateUrl: '/components/upload/uploadView.html',
@@ -59,6 +60,12 @@ function config ($stateProvider, $urlRouterProvider) {
 
 		
 
+	}
+
+	function run ($rootScope) {
+		$rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error){ 
+    console.log(error);
+});
 	}
 
 })();
