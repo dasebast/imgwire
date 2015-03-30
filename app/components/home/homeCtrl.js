@@ -10,7 +10,7 @@ function HomeCtrl (homeService, getImgs, getTags, imageCloudService, $scope, $ro
   var vm = this;
  
   vm.test = "homeCtrl win";
-  vm.imgs = getImgs;
+  vm.resolvePics = getImgs;
   vm.modalShowing = false;
   vm.url = '';
   vm.upvotes = 0;
@@ -50,7 +50,6 @@ function HomeCtrl (homeService, getImgs, getTags, imageCloudService, $scope, $ro
 
   vm.upvote = function() {
     homeService.upvote(vm.id).then(function(res){
-      console.log(res);
       vm.upvotes = res;
     })
   }
@@ -62,9 +61,11 @@ function HomeCtrl (homeService, getImgs, getTags, imageCloudService, $scope, $ro
   }
 
 
-  imageCloudService.imageCloud(vm.imgs)
+  imageCloudService.imageCloud(vm.resolvePics)
     .then(function(res) {
-      vm.imgs = res;
+      console.log(res);
+      $rootScope.imgs = res;
+      $rootScope.$emit('rootScope:emit', res);
     });
 
 }

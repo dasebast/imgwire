@@ -58,23 +58,23 @@ var setSizes = function(imgArr) {
     imgArr[0].h = maxHeight;
  
 		if (imgArr.length > 1) {
-			imgArr[1].w = maxWidth * .60;
-  		imgArr[1].h = maxHeight * .60;
+			imgArr[1].w = Math.floor(maxWidth * .60);
+  		imgArr[1].h = Math.floor(maxHeight * .60);
   	}
   	
   	if (imgArr.length > 2) {
-    	imgArr[2].w = maxWidth * .50;
-    	imgArr[2].h = maxHeight * .50;
+    	imgArr[2].w = Math.floor(maxWidth * .50);
+    	imgArr[2].h = Math.floor(maxHeight * .50);
   	}
 		
-		maxWidth = maxWidth - ((maxWidth - minWidth)*.80);
-		maxHeight = maxHeight - ((maxHeight - minHeight)*.80);
+		maxWidth = Math.floor(maxWidth - ((maxWidth - minWidth)*.80));
+		maxHeight = Math.floor(maxHeight - ((maxHeight - minHeight)*.80));
   	
   	if (imgArr.length > 3) {
 	    for (var i = 3; i < imgArr.length; i++) {
 		    var percentage = (imgArr[i].likes - minLikes) / (maxLikes + 1 - minLikes);
-		    var calcWidth = minWidth + (percentage * (maxWidth - minWidth));
-		    var calcHeight = minHeight + (percentage * (maxHeight - minHeight));
+		    var calcWidth = Math.floor(minWidth + (percentage * (maxWidth - minWidth)));
+		    var calcHeight = Math.floor(minHeight + (percentage * (maxHeight - minHeight)));
 
 		    imgArr[i].w = calcWidth;
 		    imgArr[i].h = calcHeight;
@@ -186,18 +186,18 @@ var checkCollision = function (rect, bounds) {
 var filledImgs = [];
 var bounds;
 var viewPort = {};
-viewPort.w = $(window).width() - $('#sidebar').width();
+viewPort.w = Math.floor($(window).width() - $('#sidebar').width());
 viewPort.w = viewPort.w;
-viewPort.h = $(window).height() - $('#spacer').height();
-viewPort.h = viewPort.h*0.9;
+viewPort.h = Math.floor($(window).height() - $('#spacer').height());
+viewPort.h = Math.floor(viewPort.h*0.9);
 var canvas = document.getElementById('cloud');
 var ctx = canvas.getContext('2d');
 ctx.canvas.height = viewPort.h;
 ctx.canvas.width = viewPort.w;
 var topOffset = $('#spacer').height() + 10;
 var leftOffset = $('#sidebar').width();
-var xCenter =(viewPort.w/2) + leftOffset;
-var yCenter =(viewPort.h/2) + topOffset;
+var xCenter = Math.floor((viewPort.w/2) + leftOffset);
+var yCenter =Math.floor((viewPort.h/2) + topOffset);
 var ratio = viewPort.w/viewPort.h;
 var	bounds = {
 			'x': leftOffset,
@@ -205,9 +205,9 @@ var	bounds = {
 			'w': leftOffset + viewPort.w,
 			'h': topOffset + viewPort.h
 }
-var maxWidth = viewPort.w*(0.33);
+var maxWidth = Math.floor(viewPort.w*(0.33));
 var minWidth = 70;
-var maxHeight = viewPort.h*(0.38);
+var maxHeight = Math.floor(viewPort.h*(0.38));
 var minHeight = 50;
 var overlap = 6;
 var minLikes = getMinOfArray(tempImgs);
@@ -215,8 +215,8 @@ var maxLikes = getMaxOfArray(tempImgs);
 setSizes(tempImgs);
 
 
-	tempImgs[0].top = topOffset + viewPort.h/2 - (tempImgs[0].h/2);
-	tempImgs[0].left = leftOffset + viewPort.w/2 - (tempImgs[0].w/2);
+	tempImgs[0].top = Math.floor(topOffset + viewPort.h/2 - (tempImgs[0].h/2));
+	tempImgs[0].left = Math.floor(leftOffset + viewPort.w/2 - (tempImgs[0].w/2));
 	filledImgs.push({   'x': tempImgs[0].left,
 									'y': tempImgs[0].top,
 									'w': tempImgs[0].w,
@@ -248,6 +248,14 @@ for (var i = 3; i < tempImgs.length; i++) {
 			});
 		}
 
+	}
+
+	for (var i = 0; i < tempImgs.length; i++) {
+		if (tempImgs[i].url.indexOf('img') === -1) {
+			var part1 = tempImgs[i].url.split('upload/')[0];
+			var part2 = tempImgs[i].url.split('upload/')[1];
+			tempImgs[i].tUrl = part1 + 'upload/c_fill,w_' + tempImgs[i].w + ',h_' + tempImgs[i].h +'/' + part2;
+					}
 	}
 		formattedImgArr = tempImgs;
 
