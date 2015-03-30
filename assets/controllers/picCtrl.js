@@ -61,7 +61,7 @@ module.exports = {
         .exec()
         .then(function(response){
             console.log(req.body);
-            Pics.find({ "_id": req.body._id})
+            Pics.findOne({ "_id": req.body._id})
             .select("upvotes")
             .exec()
             .then(function(result){
