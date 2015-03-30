@@ -203,6 +203,11 @@ div > #viewPort {
   animation-duration: 300ms;
 }
 
+.animated-slow {
+	-webkit-animation-duration: 1500ms;
+  animation-duration: 1500ms;
+}
+
 #modal-image-container {
 	display: flex;
 	flex-direction: column;

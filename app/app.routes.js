@@ -16,7 +16,7 @@ function config ($stateProvider, $urlRouterProvider) {
 			controllerAs: 'vm',
 			resolve: {
 				getImgs: function(homeService) {
-					return homeService.getPics();
+					return homeService.searchByTags();
 				},
 				getTags: function(homeService) {
 					return homeService.getTags();

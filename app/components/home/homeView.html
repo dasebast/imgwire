@@ -2,7 +2,7 @@
 	<div id="modal-mask" ng-click="vm.closeModal()">
 	</div>
 	<div id="modal-internal-container">
-		<div id="modal-expanded" class="animated-fast zoomInUp">
+		<div id="modal-expanded" class="animated-fast fadeIn">
 			<button class="btn btn-orange btn-close" ng-click="vm.closeModal()"><span class="glyphicon glyphicon-remove"></span></button>
 			<div class="vote-container">
 				<div id="upvote" class="vote-button" ng-click="vm.upvote()">
@@ -14,7 +14,7 @@
 				</div>
 			</div>
 			<div id="modal-image-container">
-				<img class="img img-responsive" id="modal-image" src="{{vm.url}}" />
+				<img class="img img-responsive animated-slow fadeIn" id="modal-image" src="{{vm.url}}" />
 				<div class="tag-container">
 					<div class="inline tag" ng-repeat="tag in vm.tags">{{tag.title}}</div>
 				</div>

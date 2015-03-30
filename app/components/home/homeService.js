@@ -37,8 +37,8 @@
 
 	this.searchByTags = function(searchTags) {
 		var dfd = $q.defer();
+		searchTags = searchTags || ["all"];
 		console.log(searchTags);
-
 		$http({
 			method: 'POST',
 			url: apiUrl + '/searchTagPictures',

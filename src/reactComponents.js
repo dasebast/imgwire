@@ -1,102 +1,5 @@
 var React = require('react/addons');
 var joinClasses = require('react/lib/joinClasses');
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-
-
-/*{//modal
-var Modal = React.createClass({
-  propTypes: {
-    close: React.PropTypes.func,
-    url: React.PropTypes.string
-  },
-  getInitialState: function () {
-    return {
-      url: ''
-    }
-  },
-  componentDidMount: function () {
-  },
-  handleCloseModal: function () {
-    console.log(this.props);
-    this.props.closeModal();
-  },
-  render: function () {
-    console.log(this.props);
-    var styles = {
-      box: {
-        padding: '5px',
-        border: '12px outset #B0BEC5',
-        borderRight: '12px outset #90A4AE',
-        borderBottom: '12px outset #90A4AE',
-        borderRadius: '15px',
-        margin: '50px auto 0 auto',
-        height: '80%',
-        width: '80%',
-        maxHeight: '80%',
-        maxWidth: '80%',
-        background: '#757575',
-        zIndex: 1002 
-      },
-      mask: {
-        display: 'flex',
-        justifyContent: 'center',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        height: '100%',
-        width: '100%',
-        background: 'rgba(0, 0, 0, .7)',
-        zIndex: 1001
-      },
-      imgContainer: {
-        display: 'inline-block',
-        maxHeight: '80%',
-        maxWidth: '70%' 
-      },
-      img: {
-        float: 'left',
-        height: '500px',
-        width: 'auto',
-        margin: '10px auto 10px auto',
-        borderRadius: '5px'
-      },
-      buttonContainer: {
-        float: 'right',
-        width: '60px',
-        height: '100%',
-        display: 'inline-flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-end'
-      },
-      button: {
-        height: '60px',
-        width: '60px',
-        float: 'right'
-      },
-      buttonClose: {
-        float: 'right'
-      }
-    };
-
-    return (
-      <div style={styles.mask}>
-        <div className="modal-custom" style={styles.box}>
-          <button className="btn btn-danger" style={styles.buttonClose} onClick={this.handleCloseModal}><span className="glyphicon glyphicon-remove"></span></button>
-          <div className="imgContainer" style={styles.imgContainer}>
-            <img className="noHover" src={this.props.url} style={styles.img}/>
-            <br className="clear"/>
-          </div>
-          <div style={styles.buttonContainer}>
-            <button className="btn btn-default" style={styles.button}><i className="fa fa-2x fa-hand-o-up"></i></button>
-            <button className="btn btn-default" style={styles.button}><i className="fa fa-2x fa-hand-o-down"></i></button>
-          </div>
-          <br className="clear" />
-        </div>
-      </div>
-    )
-  }
-})
-//end modal}*/
 
 
 //create image cloud
@@ -154,7 +57,6 @@ var ImageCloud = React.createClass({
       img: {
         background: '#212121',
         borderRadius: '5px',
-        border: '1px solid black',
         position: 'absolute',
         left: item.left,
         top: item.top,
@@ -167,7 +69,7 @@ var ImageCloud = React.createClass({
     
       return (
 
-            <img key={item.id} className="animated fadeInRight box" style={styles.img} src={item.url} height={item.h} width={item.w} onClick={this._handleClick.bind(null, item.url, item.likes, item.tags, item.id)} />
+            <img key={item.id} className="animated-slow bounceIn box" style={styles.img} src={item.tUrl || item.url} height={item.h} width={item.w} onClick={this._handleClick.bind(null, item.url, item.likes, item.tags, item.id)} />
       )
     });
 

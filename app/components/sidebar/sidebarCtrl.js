@@ -20,9 +20,9 @@
 				likes: 0
 			}];
 
-			vm.imgs = homeService.getPics().then(function(imgs) {
+	/*		vm.imgs = homeService.searchByTags("all").then(function(imgs) {
 				$rootScope.imgs = imgs;
-			})
+			})*/
 
 
 
@@ -97,7 +97,7 @@
 	vm.removeTag = function(tag) {
 		vm.tagArrayTitlesOnly.splice(vm.tagArrayTitlesOnly.indexOf(tag), 1);
 		if (!vm.tagArrayTitlesOnly.length) {
-			homeService.getPics().then(function(imgs) {
+			homeService.searchByTags(["all"]).then(function(imgs) {
 				$rootScope.$emit('rootScope:emit', imgs);
 			})
 		} else {
