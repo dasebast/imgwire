@@ -60,14 +60,15 @@ function HomeCtrl (homeService, getImgs, getTags, imageCloudService, $scope, $ro
     })
   }
 
-
-  imageCloudService.imageCloud(vm.resolvePics)
-    .then(function(res) {
-      console.log(res);
-      $rootScope.imgs = res;
-      $rootScope.$emit('rootScope:emit', res);
-    });
-
+console.log(vm.resolvePics);
+if (vm.resolvePics) {
+    imageCloudService.imageCloud(vm.resolvePics)
+      .then(function(res) {
+        console.log(res);
+        $rootScope.imgs = res;
+        $rootScope.$emit('rootScope:emit', res);
+      });
+  }
 }
 
 })();
