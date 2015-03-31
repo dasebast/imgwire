@@ -151,10 +151,12 @@ App.get('/api/logout', function(req, res){
 
 // ============================ CONNECTIONS ===========================
 Mongoose.connect('127.0.0.1/imgwire');
-// db = Mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function() {
-//  console.log('connected to db');
-// });
-App.listen(process.env.EXPRESS_PORT || 8888);
+db = Mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+ console.log('connected to db');
+});
+App.listen(process.env.EXPRESS_PORT, function() {
+	console.log('listening on port ' + process.env.EXPRESS_PORT);
+});
 
