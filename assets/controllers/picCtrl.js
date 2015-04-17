@@ -25,7 +25,7 @@ module.exports = {
             .select("_id")
             .exec()
             .then(function(allTheTags) {
-            
+                console.log('im in the picCtrl' + allTheTags)
                 Pics.find({ "tags": { "$all": allTheTags}})
                 .select('_id image upvotes tags')
                 .populate('tags')
